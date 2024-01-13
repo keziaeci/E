@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
             $table->timestamp('tanggal_kembali');
-            $table->foreignId('peminjaman_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('peminjaman_id')->constrained('peminjamans')->cascadeOnDelete();
             $table->timestamps();
         });
     }
