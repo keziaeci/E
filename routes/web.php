@@ -30,6 +30,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('books');
+        Route::get('/buku/{buku}/detail', 'show')->name('book-detail');
     });
 
 });
