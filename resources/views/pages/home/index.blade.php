@@ -145,12 +145,12 @@
     </div>
   </header>
 
-  <div class="mx-36 my-8">
+  <div class="m-3 lg:mx-36 lg:my-8">
     <h1 class="font-bold text-2xl">Terbaru</h1>
     
-    <div class="grid grid-cols-3 lg:grid-cols-6 p-0 m-0 gap-0">
+    <div class="grid grid-cols-2 gap-1 px-3 my-2 md:grid-cols-4 md:px-4 md:gap-2 lg:grid-cols-7 lg:p-0 lg:my-3 lg:gap-2">
       @foreach ($bukus as $buku)
-      <a href="{{ route('book-detail', $buku->id) }}" class="group relative block bg-black w-40">
+      <a href="{{ route('detail-buku', $buku->id) }}" class="group relative block bg-black w-40">
         <img
           alt="Developer"
           src="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"

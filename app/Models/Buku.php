@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Buku extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     function penerbit() : BelongsTo {
         return $this->belongsTo(Penerbit::class);

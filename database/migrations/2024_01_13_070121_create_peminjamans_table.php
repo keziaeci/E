@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('tanggal_pinjam');    
             $table->timestamp('tenggat_waktu');
+            $table->string('status');
             $table->foreignId('buku_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

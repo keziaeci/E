@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Peminjaman extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public const STATUS = [
+        'Pending' => 'Menunggu', 
+        'Borrow' => 'Sedang meminjam',
+        'Returned' => 'Sudah Dikembalikan'
+    ];
 }
