@@ -22,4 +22,8 @@ class Buku extends Model
     function komentars() : HasMany {
         return $this->hasMany(Komentar::class);
     }
+
+    function peminjamans() : HasMany {
+        return $this->hasMany(Peminjaman::class);
+    }
 }

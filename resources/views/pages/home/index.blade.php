@@ -145,6 +145,7 @@
     </div>
   </header>
 
+  {{-- buku terbaru --}}
   <div class="m-3 lg:mx-36 lg:my-8">
     <h1 class="font-bold text-2xl">Terbaru</h1>
     
@@ -175,7 +176,43 @@
       </a>
       @endforeach
     </div>
+
+    <h1 class="font-bold text-2xl">Paling disukai</h1>
+    
+    <div class="grid grid-cols-2 gap-1 px-3 my-2 md:grid-cols-4 md:px-4 md:gap-2 lg:grid-cols-7 lg:p-0 lg:my-3 lg:gap-2">
+      @foreach ($famous as $f)
+      <a href="{{ route('detail-buku', $f->id) }}" class="group relative block bg-black w-40">
+        <img
+          alt="Developer"
+          src="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
+          class="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+        />
+      
+        <div class="relative p-4 sm:p-6 lg:p-8 w-40 h-52">
+          <p class="text-sm font-medium uppercase tracking-widest text-pink-500">{{ $f->pengarang->nama }}</p>
+      
+          <p class="text-xl font-bold text-white sm:text-2xl">{{ $f->judul }}</p>
+      
+          <div class="mt-5 sm:mt-0 lg:mt-0">
+            <div
+              class="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
+            >
+              <p class="text-sm text-white">
+                {{ $f->peminjamans_count }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
+      @endforeach
+    </div>
+
+    {{-- @foreach ($famous as $f)
+        <div class="bg-gray-600">{{ $f }}</div>
+    @endforeach --}}
+
   </div>
+
     {{-- <div class="flex flex-row">
 
         <div class="basis-1/4 flex h-screen flex-col justify-between border-e bg-white">

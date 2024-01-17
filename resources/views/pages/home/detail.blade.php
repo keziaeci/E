@@ -44,17 +44,40 @@
 
               <span class="relative block border border-current bg-white px-8 py-3"> Pinjam </span>
             </a> --}}
-
+            {{-- {{ dd(is_null($status)) }} --}}
+            @if (is_null($status))
+              <form action="{{ route('pinjam-buku', $buku->id) }}" method="POST">
+                @method('Post')
+                @csrf
+                <button
+                  class="inline-block rounded border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500"
+                >
+                  Pinjam
+                </button>
+              </form>
+              @else
+              @switch($status->status)
+              @case("Menunggu")
+                <button class="inline-block rounded border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:text-gray-500 focus:outline-none focus:ring focus:ring-gray-200 active:text-gray-500">
+                  Menunggu
+                </button>
+                  {{-- <button class="inline-block rounded border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500" disabled>
+                  Menunggu Antrean
+                </button> --}}
+                      @break
+                  @case("Sedang Meminjam")
+                  <button
+                  class="inline-block rounded border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500"
+                >
+                  Mulai Baca
+                </button>
+                      @break
+                  @case("Sudah Dikembalikan")
+                      <p>hash</p>
+                      @break
+              @endswitch          
+            @endif
             {{-- button --}}
-            <form action="{{ route('pinjam-buku', $buku->id) }}" method="POST">
-              @method('Post')
-              @csrf
-              <button
-                class="inline-block rounded border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500"
-              >
-                Pinjam
-              </button>
-            </form>
           </dl>
       </div>
 

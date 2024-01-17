@@ -17,7 +17,11 @@ class PeminjamanFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tanggal_pinjam' => fake()->dateTimeThisMonth(),
+            'tenggat_waktu' => fake()->dateTimeThisMonth('+7 days'),
+            'status' => fake()->randomElement(['Menunggu','Sedang Meminjam', 'Sudah Dikembalikan']),
+            'buku_id' => mt_rand(1,12),
+            'user_id' => mt_rand(1,5),
         ];
     }
 }
