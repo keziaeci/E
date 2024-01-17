@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Pengarang extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     function bukus() : HasMany {
         return $this->hasMany(Buku::class);
