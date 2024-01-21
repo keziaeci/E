@@ -63,13 +63,13 @@
                 </button>
                   {{-- <button class="inline-block rounded border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500" disabled>
                   Menunggu Antrean
-                </button> --}}
+                </button> --}}  
                       @break
                   @case("Sedang Meminjam")
                   <button
                   class="inline-block rounded border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500"
                 >
-                  Mulai Baca
+                  Mulai Baca  
                 </button>
                       @break
                   @case("Sudah Dikembalikan")

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Kategori>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\KategoriBuku>
  */
-class KategoriFactory extends Factory
+class KategoriBukuFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class KategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->name()
+            'buku_id' => mt_rand(1,10),
+            'kategori_id' => mt_rand(1,5)
         ];
     }
 }
