@@ -73,7 +73,7 @@
                 </button>
                       @break
                   @case("Sudah Dikembalikan")
-                      <p>hash</p>
+                      <p>dah Dikembalikan</p>
                       @break
               @endswitch          
             @endif
