@@ -12,7 +12,12 @@ class Buku extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $with = ['kategoris'];
 
+    function kategoris() : BelongsToMany {
+        return $this->belongsToMany(Kategori::class, 'kategori_buku', 'buku_id', 'kategori_id');
+    }
+    
     function penerbit() : BelongsTo {
         return $this->belongsTo(Penerbit::class);
     }
@@ -28,7 +33,18 @@ class Buku extends Model
         return $this->hasMany(Peminjaman::class);
     }
 
-    function kategoris() : BelongsToMany {
-        return $this->belongsToMany(Kategori::class, 'kategori_buku', 'buku_id', 'kategori_id');
+    // TODO FILTER DATA INCLUDING RELATION
+    function scopeFilter($query , $search) {
+        return $query->where('judul' , 'like' , "%{$search}%")
+            ->orWhere('deskripsi' , 'like' , "%{$search}%")
+            ->orWhereHas('penerbit', function ($query) use ($search) {
+                $query->where('nama' , 'like' , "%{$search}%");
+            })
+            ->orWhereHas('pengarang', function ($query) use ($search) {
+                $query->where('nama' , 'like' , "%{$search}%");
+            })
+            ->orWhereHas('kategoris', function ($query) use ($search) {
+                $query->where('nama' , 'like' , "%{$search}%");
+            });
     }
 }

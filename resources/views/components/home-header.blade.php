@@ -4,49 +4,28 @@
         <div class="relative hidden sm:block">
           <label class="sr-only" for="search"> Search </label>
 
-          <input
-            class="h-10 w-full rounded-lg border-none bg-white pe-10 ps-4 text-sm shadow-sm sm:w-56"
-            id="search"
-            type="search"
-            placeholder="Search website..."
-          />
-
-          <button
-            type="button"
-            class="absolute end-1 top-1/2 -translate-y-1/2 rounded-md bg-gray-50 p-2 text-gray-600 transition hover:text-gray-700"
-          >
-            <span class="sr-only">Search</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
-          <div class="flex gap-4">
+          {{-- search bar in large screen --}}
+          <form action="{{ route('cari-buku') }}" method="GET">
+            @csrf
+            <input name="search"
+              class="h-10 w-full rounded-lg border-none bg-white pe-10 ps-4 text-sm shadow-sm sm:w-56"
+              id="search"
+              type="search"
+              placeholder="Search website..."
+            />
+  
             <button
-              type="button"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700 sm:hidden"
+              type="submit"
+              class="absolute end-1 top-1/2 -translate-y-1/2 rounded-md bg-gray-50 p-2 text-gray-600 transition hover:text-gray-700"
             >
               <span class="sr-only">Search</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-4 w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                stroke-width="2"
+              stroke-width="2"
               >
                 <path
                   stroke-linecap="round"
@@ -55,6 +34,35 @@
                 />
               </svg>
             </button>
+          </form>
+
+        </div>
+
+        <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
+          <div class="flex gap-4">
+            {{-- search bar --}}
+            <form action="">
+              <button
+                type="button"
+                class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700 sm:hidden"
+              >
+                <span class="sr-only">Search</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </form>
 
             <a
               href="#"

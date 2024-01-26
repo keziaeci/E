@@ -17,7 +17,8 @@ class Peminjaman extends Model
     public const STATUS = [
         'Pending' => 'Menunggu', 
         'Borrow' => 'Sedang Meminjam',
-        'Returned' => 'Sudah Dikembalikan'
+        'Returned' => 'Sudah Dikembalikan',
+        'Past Due' => 'Dikembalikan Terlambat'
     ];
 
     function buku() : BelongsTo {
