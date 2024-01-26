@@ -3,16 +3,19 @@
       <div class="flex items-center sm:justify-between sm:gap-4">
         <div class="relative hidden sm:block">
           <label class="sr-only" for="search"> Search </label>
-
+          
+          <form action="{{ route('cari-buku') }}" method="GET">
+            @csrf 
           <input
             class="h-10 w-full rounded-lg border-none bg-white pe-10 ps-4 text-sm shadow-lg sm:w-56"
             id="search"
             type="search"
+            name="search"
             placeholder="Search website..."
           />
 
           <button
-            type="button"
+            type="submit"
             class="absolute end-1 top-1/2 -translate-y-1/2 rounded-md bg-gray-50 p-2 text-gray-600 transition hover:text-gray-700"
           >
             <span class="sr-only">Search</span>
@@ -31,6 +34,7 @@
               />
             </svg>
           </button>
+          </form>
         </div>
 
         <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
@@ -112,9 +116,9 @@
             />
 
             <p class="ms-2 hidden text-left text-xs sm:block">
-              <strong class="block font-medium">Eric Frusciante</strong>
+              <strong class="block font-medium">{{ Auth::user()->name }}</strong>
 
-              <span class="text-gray-500"> eric@frusciante.com </span>
+              <span class="text-gray-500"> {{ Auth::user()->email }} </span>
             </p>
 
             <svg

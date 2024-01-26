@@ -32,9 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('bukus');
         Route::get('/buku/{buku}/detail', 'show')->name('detail-buku');
+        Route::get('/buku/cari' , 'search')->name('cari-buku');
+        Route::get('/buku/kategori/{kategori}', 'category')->name('kategori-buku');
     });
 
     Route::controller(LemariController::class)->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
+        Route::patch('/buku/{buku}/{peminjaman}/kembali ' , 'update')->name('kembalikan-buku');
     });
 });

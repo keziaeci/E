@@ -20,7 +20,7 @@ class PeminjamanFactory extends Factory
             'tanggal_pinjam' => fake()->dateTimeThisMonth(),
             'tenggat_waktu' => fake()->dateTimeThisMonth('+7 days'),
             'status' => fake()->randomElement(['Menunggu','Sedang Meminjam', 'Sudah Dikembalikan']),
-            'buku_id' => mt_rand(1,12),
+            'buku_id' => mt_rand(1,10),
             'user_id' => mt_rand(1,5),
         ];
     }
