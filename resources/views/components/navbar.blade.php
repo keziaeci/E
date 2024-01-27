@@ -1,4 +1,6 @@
 <header class="border-b">
+
+  {{-- //FIXME  fix profile dropdown  --}}
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center sm:justify-between sm:gap-4">
         <div class="relative hidden sm:block">
@@ -37,6 +39,7 @@
           </form>
         </div>
 
+        {{-- ketika layar kecil --}}
         <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
           <div class="flex gap-4">
             <button
@@ -107,11 +110,12 @@
             </a>
           </div>
 
-          <button type="button" class="group flex shrink-0 items-center rounded-lg transition">
+          {{-- profile button --}}
+
+          <a href="{{ route('profil-user') }}" class="group flex shrink-0 items-center rounded-lg transition">
             <span class="sr-only">Menu</span>
             <img
-              alt="Man"
-              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ Auth::user()->name }}"
               class="h-10 w-10 rounded-full object-cover"
             />
 
@@ -133,7 +137,8 @@
                 clip-rule="evenodd"
               />
             </svg>
-          </button>
+          </a>
+
         </div>
       </div>
       {{-- <div class="mt-8">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LemariController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +41,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
         Route::patch('/buku/{buku}/{peminjaman}/kembali ' , 'update')->name('kembalikan-buku');
     });
+    
+    Route::controller(UserProfileController::class)->group(function () {
+        Route::get('/user/profile' , 'index')->name('profil-user');
+        Route::patch('/user/{user}/profile/simpam' , 'update')->name('simpan-profil');
+    });
+    
 });
