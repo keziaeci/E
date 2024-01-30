@@ -33,7 +33,6 @@ class Buku extends Model
         return $this->hasMany(Peminjaman::class);
     }
 
-    // TODO FILTER DATA INCLUDING RELATION
     function scopeFilter($query , $search) {
         return $query->where('judul' , 'like' , "%{$search}%")
             ->orWhere('deskripsi' , 'like' , "%{$search}%")

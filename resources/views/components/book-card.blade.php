@@ -1,13 +1,15 @@
 <a href="{{ route('detail-buku', $id) }}" class="group block m-0 p-0">
     <img
-      src="https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+      src="https://archive.org/services/img/lccn_078073006991"
+      {{-- src="https://archive.org/download/101essaysthatwillchangethewayyouthink/page/cover_t.jpg" --}}
+      {{-- src="https://covers.openlibrary.org/b/isbn/1612680011-S.jpg" --}}
       alt=""
-      class="h-52 w-52 hover:opacity-80"
+      class="h-60 w-52 hover:opacity-80 object-fit"
     />
   
     <div class="mt-3 flex flex-shrink justify-between text-sm">
       <div>
-        <h3 class="text-gray-900 group-hover:underline group-hover:underline-offset-4">
+        <h3 class="font-semibold group-hover:underline group-hover:underline-offset-4">
           {{ $judul }}
         </h3>
   
