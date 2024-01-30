@@ -21,6 +21,10 @@ class Peminjaman extends Model
         'Past Due' => 'Dikembalikan Terlambat'
     ];
 
+    function scopeStatus($query,$status) {
+        return $query->where('status' , 'like' , "%{$status}%");
+    }
+
     function buku() : BelongsTo {
         return $this->belongsTo(Buku::class);
     }

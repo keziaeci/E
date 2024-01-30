@@ -30,6 +30,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('bukus');
         Route::get('/buku/{buku}/detail', 'show')->name('detail-buku');
@@ -44,6 +46,7 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(UserProfileController::class)->group(function () {
         Route::get('/user/profile' , 'index')->name('profil-user');
+        Route::get('/user/profile/edit' , 'edit')->name('profil-edit');
         Route::patch('/user/{user}/profile/simpam' , 'update')->name('simpan-profil');
     });
     

@@ -7,7 +7,8 @@
       <div class="flex-none">
           <dl class="flex flex-wrap m-5 lg:inline-block lg:-my-3 lg:p-5 text-sm border-r">
               <div>
-                  <img src="{{ $buku->cover }}" class="h-52 w-40 lg:h-52 lg:w-52" alt="">
+                  {{-- <img src="{{ $buku->cover }}" class="h-52 w-40 lg:h-52 lg:w-52" alt=""> --}}
+                  <img src="https://archive.org/services/img/lccn_078073006991" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
               </div>
         
             <div class="grid lg:grid-cols-1 lg:gap-1 py-3 sm:grid-cols-3 sm:gap-4">

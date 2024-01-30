@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KawanAlinea</title>
     @vite('resources/css/app.css')
+    @vite(['resources/js/app.js'])
 </head>
 <body>
     {{ $slot }}    
