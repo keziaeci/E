@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Buku;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBukuRequest;
 use App\Http\Requests\UpdateBukuRequest;
 
@@ -13,7 +14,9 @@ class BukuController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.buku.index', [
+            'bukus' => Buku::latest()->get()
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class BukuController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.buku.create');
     }
 
     /**
@@ -37,7 +40,7 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        //
+        return view('pages.admin.buku.detail', compact('buku'));
     }
 
     /**
@@ -61,6 +64,7 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {
-        //
+        $buku->delete();
+        return redirect()->route('master-buku');
     }
 }

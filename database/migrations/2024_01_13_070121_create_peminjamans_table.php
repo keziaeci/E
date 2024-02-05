@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamp('tanggal_pinjam')->nullable();    
             $table->timestamp('tenggat_waktu')->nullable();
             $table->string('status')->nullable();
-            $table->foreignId('buku_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('buku_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

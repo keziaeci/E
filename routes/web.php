@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\BukuController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LemariController;
 use App\Http\Controllers\UserProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +52,16 @@ Route::middleware('auth')->group(function () {
         Route::patch('/user/{user}/profile/simpam' , 'update')->name('simpan-profil');
     });
     
+    Route::middleware('admin')->group(function () {
+        Route::controller(DashboardController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('admin-dashboard');
+        });  
+        Route::controller(BukuController::class)->group(function () {
+            Route::get('/master/buku', 'index')->name('master-buku');
+            Route::get('/master/buku/create', 'create')->name('master-buku-create');
+            Route::get('/master/buku/{buku}/detail', 'show')->name('master-buku-detail');
+            Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
+        });  
+    });
+
 });

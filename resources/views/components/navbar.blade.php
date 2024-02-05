@@ -195,6 +195,12 @@
                   <a href="{{ route('profil-user') }}" class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem">
                     Profil Saya
                   </a>
+                  
+                  @if (Auth::user()->role === 'Admin')
+                  <a href="{{ route('admin-dashboard') }}" class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem">
+                    Halaman Admin
+                  </a>
+                  @endif
   
                   <form method="POST" action="{{ route('logout') }}">
                     @method('POST')
