@@ -1,5 +1,4 @@
 <x-admin-layout>
-
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
         <form action="{{ route('master-buku-store', Auth::user()->id) }}" method="POST" class="space-y-4">
             @csrf
@@ -15,6 +14,7 @@
                     id="judul"
                     placeholder="Judul"
                     name="judul"
+                    value="{{ old('judul',$buku->judul) }}"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"
                     />
                     @error('judul')
@@ -24,15 +24,14 @@
                 
                 <div>
                     <label for="UserEmail" class="block text-xs font-medium text-gray-700"> Tahun Terbit </label>
-                    {{-- <label class="sr-only" for="email">Tahun Terbit</label> --}}
                     <input
                         class="w-full rounded-lg border border-gray-200 p-3 text-sm"
                         placeholder="Tahun Terbit"
+                        value="{{ old('tahun_terbit',$buku->tahun_terbit) }}"
                         type="number" min="1000" max="3000" step="1"
                         id="tahun_terbit"
                         name="tahun_terbit"
                     />
-                    {{-- <input type="number" min="1900" max="2099" step="1" /> --}}
                     @error('tahun_terbit')
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
@@ -42,7 +41,6 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <label for="HeadlineAct" class="sr-only"> Pengarang </label>
-                    {{-- <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Headliner </label> --}}
                     
                     <select
                     name="pengarang"
@@ -51,6 +49,9 @@
                     >
                     <option @selected(true) disabled="disabled">Pengarang</option>
                     @foreach ($pengarangs as $pengarang)
+                    @if ($buku->pengarang_id == $pengarang->id)
+                    <option value="{{ $pengarang->id }}" selected>{{ $pengarang->nama }}</option>
+                    @endif
                     <option value="{{ $pengarang->id }}">{{ $pengarang->nama }}</option>
                     @endforeach
                     </select>
@@ -65,6 +66,9 @@
                     >
                     <option @selected(true) disabled="disabled">Penerbit</option>
                     @foreach ($penerbits as $penerbit)
+                        @if ($buku->penerbit_id == $penerbit->id)
+                        <option value="{{ $penerbit->id }}" selected>{{ $penerbit->nama }}</option>
+                        @endif
                         <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                     @endforeach
                     </select>
@@ -82,11 +86,11 @@
                     <input
                         class="w-full rounded-lg border-gray-200 p-3 text-sm"
                         placeholder="Stok"
+                        value="{{ old('stok',$buku->stok) }}"
                         type="number" min="1" max="3000" step="1"
                         id="stok"
                         name="stok"
                     />
-                    {{-- <input type="number" min="1900" max="2099" step="1" /> --}}
                     @error('stok')
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
@@ -96,6 +100,7 @@
                     <input
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Cover"
+                    value="{{ old('cover',$buku->cover) }}"
                     type="text"
                     id="cover"
                     name="cover"
@@ -110,9 +115,9 @@
 
                 <div class="form-control">
                     <label class="label">
-                        {{-- <span class="label-text">Tulis</span> --}}
                     </label>
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
+                        {{   old('deskripsi', $buku->deskripsi)    }}
                     </textarea>
                     @error('deksripsi')
                     <p class="text-xs text-red-700">{{ $message }}</p>
@@ -125,7 +130,7 @@
                 type="submit"
                 class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
                 >
-                Simpan Data
+                Simpan Perubahan
                 </button>
             </div>
         </form>

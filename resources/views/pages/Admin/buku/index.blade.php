@@ -1,4 +1,7 @@
 <x-admin-layout>
+
+  
+
     <div class="mx-10 my-5 flex justify-end">
         <a href="{{ route('master-buku-create') }}" class="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm bg-indigo-600 text-white hover:bg-indigo-700 focus:relative" title="Edit Product">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFF" 
@@ -19,7 +22,7 @@
     
             <tbody class="divide-y divide-gray-200">
                 @foreach ($bukus as $buku)
-                <tr>
+                <tr class="odd:bg-gray-50">
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $buku->judul }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->pengarang->nama }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->penerbit->nama }}</td>
@@ -36,4 +39,53 @@
             </tbody>
         </table>
     </div>
+
+    {{-- //FIXME success alert after inserting data --}}
+    {{-- @if (session()->has('success')) --}}
+    <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20  top-10 rounded-xl border border-gray-100 bg-white p-4">
+        
+        <div class="flex items-start gap-4">
+            <span class="text-green-600">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+                >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+                </svg>
+            </span>
+            
+            <div class="flex-1">
+                <strong class="block font-medium text-gray-900"> Berhasil </strong>
+        
+                <p class="mt-1 text-sm text-gray-700">Wasu</p>
+        
+                {{-- <p class="mt-1 text-sm text-gray-700">{{ $success }}</p> --}}
+            </div>
+            
+            <button @click="open = false" class="text-gray-500 transition hover:text-gray-600">
+                <span class="sr-only">Dismiss popup</span>
+        
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+                >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    {{-- @endif --}}
+
 </x-admin-layout>

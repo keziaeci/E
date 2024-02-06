@@ -7,8 +7,13 @@
     <title>Alpine.js Sidebar</title>
     @vite('resources/css/app.css')
     @vite(['resources/js/app.js'])
+
+    {{-- ckfinder --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
 </head>
-<body>
+<body class="">
+
 {{-- <body x-data="{ sidebarOpen: false }"> --}}
     <section  x-data="{ isOpen: true }" class="flex flex-row min-w-full min-h-full">
         <nav
@@ -260,9 +265,10 @@
                 </button> --}}
                 {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg> --}}
             </div>
-            <div class=" lg:flex-auto">
+            <div class="lg:flex-auto">
                 {{ $slot }}
             </div>
+            
         </div>
         
     </section>

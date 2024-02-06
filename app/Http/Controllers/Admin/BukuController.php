@@ -6,6 +6,9 @@ use App\Models\Buku;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBukuRequest;
 use App\Http\Requests\UpdateBukuRequest;
+use App\Models\Penerbit;
+use App\Models\Pengarang;
+use PhpParser\Node\Stmt\Return_;
 
 class BukuController extends Controller
 {
@@ -24,7 +27,10 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.buku.create');
+        return view('pages.admin.buku.create',[
+            'pengarangs' => Pengarang::all(),
+            'penerbits' => Penerbit::all(),
+        ]);
     }
 
     /**
@@ -32,7 +38,20 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
-        //
+        // dd($request);
+        $credentials = $request->validated();
+
+        $data =  Buku::create([
+            'judul' => $credentials['judul'],
+            'tahun_terbit' => $credentials['tahun_terbit'],
+            'penerbit_id' => $credentials['penerbit'],
+            'pengarang_id' => $credentials['pengarang'],
+            'stok' => $credentials['stok'],
+            'cover' => $credentials['cover'],
+            'deskripsi' => $credentials['deskripsi'],
+        ]);
+        
+        return redirect()->route('master-buku')->with('success', 'Data sukses ditambahkan');
     }
 
     /**
@@ -48,7 +67,11 @@ class BukuController extends Controller
      */
     public function edit(Buku $buku)
     {
-        //
+        return view('pages.admin.buku.edit', [
+            'buku' => $buku,
+            'pengarangs' => Pengarang::all(),
+            'penerbits' => Penerbit::all(),
+        ]);
     }
 
     /**

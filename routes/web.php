@@ -59,7 +59,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(BukuController::class)->group(function () {
             Route::get('/master/buku', 'index')->name('master-buku');
             Route::get('/master/buku/create', 'create')->name('master-buku-create');
+            Route::get('/master/buku/{buku}/edit', 'edit')->name('master-buku-edit');
             Route::get('/master/buku/{buku}/detail', 'show')->name('master-buku-detail');
+            Route::post('/master/buku/store', 'store')->name('master-buku-store');
             Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
         });  
     });
