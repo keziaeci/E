@@ -40,6 +40,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public const ROLE =  [
+        'User' => 'Pengguna',
+        'Admin' => 'Admin'
+    ];
     function peminjamans() : HasMany {
         return $this->hasMany(Peminjaman::class);
     }

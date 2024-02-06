@@ -37,7 +37,8 @@
 
         </div>
 
-        <div class="flex flex-1 items-center justify-between lg:gap-8 sm:justify-end">
+        {{-- small screen --}}
+        <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
           <div class="flex gap-4">
             {{-- search bar --}}
             <form action="">
@@ -109,110 +110,97 @@
               </svg>
             </a>
           </div>
-          
-          <a href="{{ route('profil-user') }}" class="group flex shrink-0 items-center rounded-lg transition">
-            <span class="sr-only">Menu</span>
-            <x-profile-image h=10 w=10 />
 
-            {{-- <img
-              alt="Man"
-              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              class="h-10 w-10 rounded-full object-cover"
-            /> --}}
+          {{-- profile icon --}}
+          <div class="flex gap-2 lg:flex-none m-0 p-0">
+            <a href="{{ route('profil-user') }}" class="group flex shrink-0 items-center rounded-lg transition">
+              <span class="sr-only">Menu</span>
+              <x-profile-image h=10 w=10 />
 
-            <p class="ms-2 hidden text-left text-xs sm:block">
-              <strong class="block font-medium">{{ Auth::user()->name }}</strong>
+              <p class="ms-2 hidden text-left text-xs sm:block">
+                <strong class="block font-medium">{{ Auth::user()->name }}</strong>
 
-              <span class="text-gray-500"> {{ Auth::user()->email }} </span>
-            </p>
+                <span class="text-gray-500"> {{ Auth::user()->email }} </span>
+              </p>
 
-            {{-- <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ms-4 hidden h-5 w-5 text-gray-500 transition group-hover:text-gray-700 sm:block"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg> --}}
-          </a>
+            </a>
 
-          {{-- dropdown toggle --}}
-          <div x-data="{ isActive: false }" class="relative">
-            <div class="inline-flex items-center overflow-hidden rounded-md shadow-sm bg-white">
- 
-              <button
-                x-on:click="isActive = !isActive"
-                class="h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700"
-              >
-                <span class="sr-only">Menu</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+            {{-- dropdown toggle --}}
+            <div x-data="{ isActive: false }" class="relative">
+              <div class="inline-flex items-center overflow-hidden rounded-md shadow-sm bg-white">
+  
+                <button
+                  x-on:click="isActive = !isActive"
+                  class="h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700"
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div
-              class="absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-sm"
-              role="menu"
-              x-cloak
-              x-transition
-              x-show="isActive"
-              x-on:click.away="isActive = false"
-              x-on:keydown.escape.window="isActive = false"
-            >
-              <div class="p-2">
-                <a href="{{ route('profil-user') }}" class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem">
-                  Profil Saya
-                </a>
-
-                <form method="POST" action="{{ route('logout') }}">
-                  @method('POST')
-                  @csrf
-                  <button
-                    type="submit"
-                    class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
-                    role="menuitem"
+                  <span class="sr-only">Menu</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <div
+                class="absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-sm"
+                role="menu"
+                x-cloak
+                x-transition
+                x-show="isActive"
+                x-on:click.away="isActive = false"
+                x-on:keydown.escape.window="isActive = false"
+              >
+                <div class="p-2">
+                  <a href="{{ route('profil-user') }}" class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem">
+                    Profil Saya
+                  </a>
+
+                  @if (Auth::user()->role === 'Admin')
+                  <a href="{{ route('admin-dashboard') }}" class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem">
+                    Halaman Admin
+                  </a>
+                  @endif
+
+                  <form method="POST" action="{{ route('logout') }}">
+                    @method('POST')
+                    @csrf
+                    <button
+                      type="submit"
+                      class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                      role="menuitem"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
 
-                    Logout
-                  </button>
-                </form>
+                      Logout
+                    </button>
+                  </form>
 
-                {{-- <form action="{{ route('logout') }}" method="POST">
-                  @csrf
-                  <button type="submit">logout</button>
-                </form> --}}
+                </div>
               </div>
             </div>
+            {{-- dropdown toggle end --}}
           </div>
-          {{-- dropdown toggle end --}}
 
         </div>
       </div>

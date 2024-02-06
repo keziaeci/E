@@ -60,6 +60,6 @@
                 </div>
             </form>
 
-        </div>
+        </div>1
     </div>
 </x-app-layout>

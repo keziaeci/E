@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-navbar/>
 
-    <div class="my-10 lg:mx-36">
+    <div class="mx-5 my-5 lg:my-10 lg:mx-36">
         {{-- Judul --}}
         <div class="flex gap-2 flex-col items-center">
             <h1 class="text-4xl font-bold">{{ $kategoris->nama }}</h1>
             <h1 class="text-sm mt-3 text-gray-500">{{ $kategoris->bukus->count() }} buku</h1>
         </div>
 
-        <hr class="mt-20">
+        <hr class="mt-6 lg:mt-20">
 
         <h1 class="font-bold text-pink-600 text-2xl my-5">Buku rekomendasi</h1>
         
