@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BukuController;
+use App\Http\Controllers\Admin\PengarangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -62,8 +63,19 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/buku/{buku}/edit', 'edit')->name('master-buku-edit');
             Route::get('/master/buku/{buku}/detail', 'show')->name('master-buku-detail');
             Route::post('/master/buku/store', 'store')->name('master-buku-store');
+            Route::patch('/master/buku/{buku}/update', 'update')->name('master-buku-update');
             Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
         });  
+        
+        Route::controller(PengarangController::class)->group(function () {
+            Route::get('/master/pengarang', 'index')->name('master-pengarang');
+            Route::get('/master/pengarang/create', 'create')->name('master-pengarang-create');
+            Route::get('/master/pengarang/{pengarang}/edit', 'edit')->name('master-pengarang-edit');
+            Route::post('/master/pengarang/store', 'store')->name('master-pengarang-store');
+            Route::patch('/master/pengarang/{pengarang}/update', 'update')->name('master-pengarang-update');
+            Route::delete('/master/pengarang/{pengarang}/delete', 'destroy')->name('master-pengarang-delete');
+        });
+        
     });
 
 });
