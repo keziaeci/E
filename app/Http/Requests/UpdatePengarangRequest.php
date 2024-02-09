@@ -11,7 +11,7 @@ class UpdatePengarangRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,14 @@ class UpdatePengarangRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules =  [
+            'nama' => 'required'
         ];
+
+        if ($this->input('nama') != $this->pengarang->nama) {
+                $rules['nama'] = "required|unique:pengarangs";
+            }
+
+        return $rules;
     }
 }

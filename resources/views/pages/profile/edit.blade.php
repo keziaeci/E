@@ -4,7 +4,7 @@
 
     <div class="m-3 lg:mx-56 lg:my-10 my-5 flex flex-wrap flex-col lg:flex-nowrap">
        
-
+        
         <x-profile-book-tab/>
         
         <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
