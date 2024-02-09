@@ -1,12 +1,14 @@
 <x-admin-layout>
 
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
+        <h1 class="text-xl font-bold">Tambah Buku</h1>
         <form action="{{ route('master-buku-store', Auth::user()->id) }}" method="POST" class="space-y-4">
             @csrf
             @method('POST')
             
             <div class="grid items-center grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
+                    {{-- //TODO many to many categories with multiple select --}}
                     {{-- //FIXME form input --}}
                     <label for="judul" class="block text-xs font-medium text-gray-700"> Judul </label>
                     
@@ -115,6 +117,24 @@
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
                     </textarea>
                     @error('deksripsi')
+                    <p class="text-xs text-red-700">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <label for="HeadlineAct" class="sr-only"> Kategori </label>
+                    {{-- <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Headliner </label> --}}
+                    
+                    <select
+                    name="kategori"
+                    id="HeadlineAct"
+                    class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                    >
+                    <option @selected(true) disabled="disabled">Kategori</option>
+                    @foreach ($kategoris as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                    @endforeach
+                    </select>
+                    @error('kategori')
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
                 </div>

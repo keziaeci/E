@@ -1,7 +1,7 @@
 <x-admin-layout>
 
   
-
+    {{-- //FIXME datatables table  --}}
     <div class="mx-10 my-5 flex justify-end">
         <a href="{{ route('master-buku-create') }}" class="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm bg-indigo-600 text-white hover:bg-indigo-700 focus:relative" title="Edit Product">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFF" 
@@ -40,8 +40,8 @@
         </table>
     </div>
 
-    {{-- //FIXME success alert after inserting data --}}
-    {{-- @if (session()->has('success')) --}}
+    {{-- //FIXME success alert position after inserting data --}}
+    @if (session()->has('success'))
     <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20  top-10 rounded-xl border border-gray-100 bg-white p-4">
         
         <div class="flex items-start gap-4">
@@ -65,9 +65,9 @@
             <div class="flex-1">
                 <strong class="block font-medium text-gray-900"> Berhasil </strong>
         
-                <p class="mt-1 text-sm text-gray-700">Wasu</p>
+                {{-- <p class="mt-1 text-sm text-gray-700">Wasu</p> --}}
         
-                {{-- <p class="mt-1 text-sm text-gray-700">{{ $success }}</p> --}}
+                <p class="mt-1 text-sm text-gray-700">{{ session('success') }}</p>
             </div>
             
             <button @click="open = false" class="text-gray-500 transition hover:text-gray-600">
@@ -86,6 +86,6 @@
             </button>
         </div>
     </div>
-    {{-- @endif --}}
+    @endif
 
 </x-admin-layout>

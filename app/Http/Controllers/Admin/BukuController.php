@@ -6,6 +6,7 @@ use App\Models\Buku;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBukuRequest;
 use App\Http\Requests\UpdateBukuRequest;
+use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
 use PhpParser\Node\Stmt\Return_;
@@ -30,6 +31,7 @@ class BukuController extends Controller
         return view('pages.admin.buku.create',[
             'pengarangs' => Pengarang::all(),
             'penerbits' => Penerbit::all(),
+            'kategoris' => Kategori::all(),
         ]);
     }
 
@@ -41,7 +43,7 @@ class BukuController extends Controller
         // dd($request);
         $credentials = $request->validated();
 
-        $data =  Buku::create([
+        $buku =  Buku::create([
             'judul' => $credentials['judul'],
             'tahun_terbit' => $credentials['tahun_terbit'],
             'penerbit_id' => $credentials['penerbit'],
@@ -50,8 +52,10 @@ class BukuController extends Controller
             'cover' => $credentials['cover'],
             'deskripsi' => $credentials['deskripsi'],
         ]);
+
+        $buku->kategoris()->attach($credentials['kategori']);
         
-        return redirect()->route('master-buku')->with('success', 'Data sukses ditambahkan');
+        return redirect()->route('master-buku')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -79,7 +83,20 @@ class BukuController extends Controller
      */
     public function update(UpdateBukuRequest $request, Buku $buku)
     {
-        //
+        $request->validated();
+
+        $buku->update([
+            'judul' => $request->judul,
+            'tahun_terbit' => $request->tahun_terbit,
+            'pengarang_id' => $request->pengarang,
+            'penerbit_id' => $request->penerbit,
+            'stok' => $request->stok,
+            'cover' => $request->cover,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->route('master-buku')->with('success', 'Data berhasil diubah');
+
     }
 
     /**
@@ -88,6 +105,6 @@ class BukuController extends Controller
     public function destroy(Buku $buku)
     {
         $buku->delete();
-        return redirect()->route('master-buku');
+        return redirect()->route('master-buku')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -22,13 +22,14 @@ class StoreBukuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required|unique:bukus',
+            'judul' => 'required',
             'tahun_terbit' => 'required',
             'pengarang' => 'required',
             'penerbit' => 'required',
             'stok' => 'nullable',
             'cover' => 'nullable',
             'deskripsi' => 'required',
+            'kategori' => 'required',
         ];
     }
 }

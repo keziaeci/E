@@ -11,7 +11,7 @@ class UpdateBukuRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,19 @@ class UpdateBukuRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules =  [
+            'judul' => 'required',
+            'tahun_terbit' => 'required',
+            'pengarang' => 'required',
+            'penerbit' => 'required',
+            'stok' => 'nullable',
+            'cover' => 'nullable',
+            'deskripsi' => 'required',
         ];
+        // if ($this->input('judul') != $this->buku->judul) {
+        //     $rules['judul'] = "required|unique:bukus";
+        // }
+
+        return $rules;
     }
 }
