@@ -52,10 +52,17 @@
             <a href="{{ route('master-pengarang') }}"
                 :class="{'justify-start ':!isOpen, 'justify-center':isOpen}"
                 class="min-w-full rounded border  flex flex-row items-center gap-x-4 p-2" >
-                <svg  class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
                 <p 
                 :class="{ 'hidden': isOpen, 'flex items-center justify-center': !isOpen }"
                 >Master Pengarang</p>
+            </a>
+            <a href="{{ route('master-user') }}"
+                :class="{'justify-start ':!isOpen, 'justify-center':isOpen}"
+                class="min-w-full rounded border  flex flex-row items-center gap-x-4 p-2" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>                <p 
+                :class="{ 'hidden': isOpen, 'flex items-center justify-center': !isOpen }"
+                >Master User</p>
             </a>
 
 

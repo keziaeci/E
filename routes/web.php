@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LemariController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,17 @@ Route::middleware('auth')->group(function () {
             Route::patch('/master/pengarang/{pengarang}/update', 'update')->name('master-pengarang-update');
             Route::delete('/master/pengarang/{pengarang}/delete', 'destroy')->name('master-pengarang-delete');
         });
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/master/user', 'index')->name('master-user');
+            Route::get('/master/user/create', 'create')->name('master-user-create');
+            Route::get('/master/user/{user}/edit', 'edit')->name('master-user-edit');
+            Route::post('/master/user/store', 'store')->name('master-user-store');
+            Route::patch('/master/user/{user}/update', 'update')->name('master-user-update');
+            Route::delete('/master/user/{user}/delete', 'destroy')->name('master-user-delete');
+        });
+
+
         
     });
 

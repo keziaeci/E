@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePengarangRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,11 @@ class UpdatePengarangRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
-            'nama' => 'required'
+        return [
+            'nama' => 'required|string',
+            'username' => 'required|unique:users|string|alpha_dash',
+            'email' => 'required|unique:users|email',
+            'password' => 'required'
         ];
-
-        if ($this->input('nama') != $this->pengarang->nama) {
-                $rules['nama'] = "required|unique:pengarangs";
-        }
-
-        return $rules;
     }
 }
