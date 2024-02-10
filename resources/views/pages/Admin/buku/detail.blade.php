@@ -70,9 +70,11 @@
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Genre</dt>
-                    @foreach ($buku->kategoris as $kategori)
-                    <dd class="text-gray-700 sm:col-span-2">{{ $kategori->nama }}</dd>
-                    @endforeach
+                    <dd class="text-gray-700 sm:col-span-2">
+                        @foreach ($buku->kategoris as $kategori)
+                        {{ $kategori->nama }}
+                        @endforeach
+                    </dd>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">

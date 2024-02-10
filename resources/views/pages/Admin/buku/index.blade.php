@@ -14,6 +14,7 @@
             <thead class="ltr:text-left rtl:text-right">
                 <tr>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Judul</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Genre</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pengarang</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Penerbit</th>
                     {{-- <th class="px-4 py-2"></th> --}}
@@ -24,6 +25,15 @@
                 @foreach ($bukus as $buku)
                 <tr class="odd:bg-gray-50">
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $buku->judul }}</td>
+                    @if ($buku->kategoris->isEmpty())
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">-</td>
+                    @else
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">
+                        @foreach ($buku->kategoris as $kategori)
+                        {{ $kategori->nama }}
+                        @endforeach
+                    </td>
+                    @endif
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->pengarang->nama }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->penerbit->nama }}</td>
                     <td class="whitespace-nowrap px-4 py-2">
