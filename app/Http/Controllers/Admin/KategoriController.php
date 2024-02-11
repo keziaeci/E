@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Kategori;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
@@ -13,7 +14,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.kategori.index',[
+            'kategoris' => Kategori::latest()->get()
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.kategori.create');
     }
 
     /**
@@ -29,7 +32,12 @@ class KategoriController extends Controller
      */
     public function store(StoreKategoriRequest $request)
     {
-        //
+        $request->validated();
+        Kategori::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-kategori')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -45,7 +53,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        return view('pages.admin.kategori.edit',compact('kategori'));
     }
 
     /**
@@ -53,7 +61,12 @@ class KategoriController extends Controller
      */
     public function update(UpdateKategoriRequest $request, Kategori $kategori)
     {
-        //
+        $request->validated();
+        $kategori->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-kategori')->with('success', 'Data berhasil diubah!');
     }
 
     /**
@@ -61,6 +74,7 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+        return redirect()->route('master-kategori')->with('success', 'Data berhasil dihapus');
     }
 }

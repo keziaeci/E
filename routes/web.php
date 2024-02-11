@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LemariController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -87,13 +88,22 @@ Route::middleware('auth')->group(function () {
             Route::delete('/master/user/{user}/delete', 'destroy')->name('master-user-delete');
         });
         
-Route::controller(PenerbitController::class)->group(function () {
+        Route::controller(PenerbitController::class)->group(function () {
             Route::get('/master/penerbit', 'index')->name('master-penerbit');
             Route::get('/master/penerbit/create', 'create')->name('master-penerbit-create');
             Route::get('/master/penerbit/{penerbit}/edit', 'edit')->name('master-penerbit-edit');
             Route::post('/master/penerbit/store', 'store')->name('master-penerbit-store');
             Route::patch('/master/penerbit/{penerbit}/update', 'update')->name('master-penerbit-update');
             Route::delete('/master/penerbit/{penerbit}/delete', 'destroy')->name('master-penerbit-delete');
+        });
+
+        Route::controller(KategoriController::class)->group(function () {
+            Route::get('/master/kategori', 'index')->name('master-kategori');
+            Route::get('/master/kategori/create', 'create')->name('master-kategori-create');
+            Route::get('/master/kategori/{kategori}/edit', 'edit')->name('master-kategori-edit');
+            Route::post('/master/kategori/store', 'store')->name('master-kategori-store');
+            Route::patch('/master/kategori/{kategori}/update', 'update')->name('master-kategori-update');
+            Route::delete('/master/kategori/{kategori}/delete', 'destroy')->name('master-kategori-delete');
         });
 
     });
