@@ -4,7 +4,7 @@
     {{-- //FIXME datatables table  --}}
     <div class="mx-10 my-5 flex justify-end">
         <a 
-        href="{{ route('master-pengarang-create') }}" 
+        href="{{ route('master-penerbit-create') }}" 
         class="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm bg-indigo-600 text-white hover:bg-indigo-700 focus:relative" title="Edit Product">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFF" 
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -23,21 +23,14 @@
             </thead>
     
             <tbody class="divide-y divide-gray-200">
-                @foreach ($pengarangs as $pengarang)
+                @foreach ($penerbits as $penerbit)
                 <tr class="odd:bg-gray-50">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $pengarang->nama }}</td>
-                    {{-- <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $pengarang->nama }}</td> --}}
-                    {{-- <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $pengarang->penerbit->nama }}</td> --}}
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $penerbit->nama }}</td>
                     <td class="whitespace-nowrap px-4 py-2">
-                        {{-- <a
-                        href="{{ route('master-pengarang-detail' , $pengarang->id) }}"
-                        class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                        >
-                        Detail
-                        </a> --}}
+                        
                         <span class="inline-flex">
 
-                            <a href="{{ route('master-pengarang-edit', $pengarang->id) }}"  class="inline-block border-e p-3 text-gray-700 bg-gray-100 rounded hover:bg-gray-200 focus:relative" title="Edit Product">
+                            <a href="{{ route('master-penerbit-edit', $penerbit->id) }}"  class="inline-block border-e p-3 text-gray-700 bg-gray-100 rounded hover:bg-gray-200 focus:relative" title="Edit Product">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -53,7 +46,7 @@
                                     />
                                 </svg>
                             </a>
-                            <form action="{{ route('master-pengarang-delete' , $pengarang->id) }}" method="POST">
+                            <form action="{{ route('master-penerbit-delete' , $penerbit->id) }}" method="POST">
                                 <button onclick="return confirm('Apakah anda yakin?');" type="submit" class="inline-block rounded p-3 bg-red-50 text-red-700 hover:bg-red-100 focus:relative" title="Delete Product">
                                 @method('delete')
                                 @csrf

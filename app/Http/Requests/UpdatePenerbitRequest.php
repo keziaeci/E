@@ -11,7 +11,7 @@ class UpdatePenerbitRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,14 @@ class UpdatePenerbitRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $rules =  [
+            'nama' => 'required'
         ];
+
+        if ($this->input('nama') != $this->penerbit->nama) {
+                $rules['nama'] = "required|unique:penerbits";
+        }
+
+        return $rules;
     }
 }

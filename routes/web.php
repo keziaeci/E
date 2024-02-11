@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BukuController;
+use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\PengarangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -85,9 +86,16 @@ Route::middleware('auth')->group(function () {
             Route::patch('/master/user/{user}/update', 'update')->name('master-user-update');
             Route::delete('/master/user/{user}/delete', 'destroy')->name('master-user-delete');
         });
-
-
         
+Route::controller(PenerbitController::class)->group(function () {
+            Route::get('/master/penerbit', 'index')->name('master-penerbit');
+            Route::get('/master/penerbit/create', 'create')->name('master-penerbit-create');
+            Route::get('/master/penerbit/{penerbit}/edit', 'edit')->name('master-penerbit-edit');
+            Route::post('/master/penerbit/store', 'store')->name('master-penerbit-store');
+            Route::patch('/master/penerbit/{penerbit}/update', 'update')->name('master-penerbit-update');
+            Route::delete('/master/penerbit/{penerbit}/delete', 'destroy')->name('master-penerbit-delete');
+        });
+
     });
 
 });
