@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BukuController;
+use App\Http\Controllers\Admin\PeminjamanController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\PengarangController;
 use Illuminate\Support\Facades\Route;
@@ -104,6 +105,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/master/kategori/store', 'store')->name('master-kategori-store');
             Route::patch('/master/kategori/{kategori}/update', 'update')->name('master-kategori-update');
             Route::delete('/master/kategori/{kategori}/delete', 'destroy')->name('master-kategori-delete');
+        });
+
+        Route::controller(PeminjamanController::class)->group(function () {
+            Route::get('/master/peminjaman', 'index')->name('master-peminjaman');
+            Route::get('/master/peminjaman/create', 'create')->name('master-peminjaman-create');
+            Route::get('/master/peminjaman/{peminjaman}/detail', 'show')->name('master-peminjaman-detail');
+            Route::get('/master/peminjaman/{peminjaman}/edit', 'edit')->name('master-peminjaman-edit');
+            Route::post('/master/peminjaman/store', 'store')->name('master-peminjaman-store');
+            Route::patch('/master/peminjaman/{peminjaman}/update', 'update')->name('master-peminjaman-update');
+            Route::delete('/master/peminjaman/{peminjaman}/delete', 'destroy')->name('master-peminjaman-delete');
         });
 
     });
