@@ -1,8 +1,9 @@
 <x-admin-layout>
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
-        <form action="{{ route('master-buku-store', Auth::user()->id) }}" method="POST" class="space-y-4">
+        <h1 class="text-xl font-bold">Ubah Buku</h1>
+        <form action="{{ route('master-buku-update',  $buku->id) }}" method="POST" class="space-y-4">
             @csrf
-            @method('POST')
+            @method('patch')
             
             <div class="grid items-center grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -51,8 +52,9 @@
                     @foreach ($pengarangs as $pengarang)
                     @if ($buku->pengarang_id == $pengarang->id)
                     <option value="{{ $pengarang->id }}" selected>{{ $pengarang->nama }}</option>
-                    @endif
+                    @else
                     <option value="{{ $pengarang->id }}">{{ $pengarang->nama }}</option>
+                    @endif
                     @endforeach
                     </select>
                     @error('pengarang')

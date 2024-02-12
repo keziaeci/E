@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePenerbitRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,19 @@ class UpdatePenerbitRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules =  [
-            'nama' => 'required'
+        $rules = [
+            'nama' => 'required|string',
+            'username' => 'required|string|alpha_dash',
+            'email' => 'required|email',
+            'password' => 'required'
         ];
 
-        if ($this->input('nama') != $this->penerbit->nama) {
-                $rules['nama'] = "required|unique:penerbits";
+        if ($this->input('username') != $this->user->username) {
+            $rules['username'] = 'required|unique:users|string|alpha_dash';
+        }
+
+        if ($this->input('email') != $this->user->email) {
+            $rules['email'] = 'required|unique:users|email';
         }
 
         return $rules;

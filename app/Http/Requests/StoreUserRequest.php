@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBukuRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,10 @@ class StoreBukuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'tahun_terbit' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'stok' => 'nullable',
-            'cover' => 'nullable',
-            'deskripsi' => 'required',
-            'kategori' => 'required',
+            'nama' => 'required|string',
+            'username' => 'required|unique:users|string|alpha_dash',
+            'email' => 'required|unique:users|email',
+            'password' => 'required'
         ];
     }
 }

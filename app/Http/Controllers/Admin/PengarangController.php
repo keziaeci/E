@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Pengarang;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePengarangRequest;
 use App\Http\Requests\UpdatePengarangRequest;
 
@@ -13,15 +14,17 @@ class PengarangController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.pengarang.index',[
+            'pengarangs' => Pengarang::latest()->get()
+        ]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('pages.admin.pengarang.create');
     }
 
     /**
@@ -29,7 +32,12 @@ class PengarangController extends Controller
      */
     public function store(StorePengarangRequest $request)
     {
-        //
+        $request->validated();
+        Pengarang::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-pengarang')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -45,7 +53,7 @@ class PengarangController extends Controller
      */
     public function edit(Pengarang $pengarang)
     {
-        //
+        return view('pages.admin.pengarang.edit',compact('pengarang'));
     }
 
     /**
@@ -53,7 +61,12 @@ class PengarangController extends Controller
      */
     public function update(UpdatePengarangRequest $request, Pengarang $pengarang)
     {
-        //
+        $request->validated();
+        $pengarang->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-pengarang')->with('success', 'Data berhasil diubah!');
     }
 
     /**
@@ -61,6 +74,7 @@ class PengarangController extends Controller
      */
     public function destroy(Pengarang $pengarang)
     {
-        //
+        $pengarang->delete();
+        return redirect()->route('master-pengarang')->with('success', 'Data berhasil dihapus');
     }
 }

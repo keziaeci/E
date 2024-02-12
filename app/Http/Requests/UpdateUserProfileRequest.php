@@ -23,7 +23,7 @@ class UpdateUserProfileRequest extends FormRequest
     public function rules(): array
     {
         $rules =  [
-            'name' => 'string',
+            'name' => 'required|string',
             'username' => 'string|alpha_dash',
             'email' => 'email'
         ];

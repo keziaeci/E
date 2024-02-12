@@ -82,13 +82,32 @@
                 </div>
                 
                 <div class="flex items-center justify-between">
-                    <p class="text-sm text-gray-500">
-                    No account?
-                    <a class="underline" href="">Sign up</a>
-                    </p>
+                    <div class="px-5">
+                        <label for="remember" class="flex gap-2 items-center">
+                            <input
+                            type="checkbox"
+                            id="remember"
+                            name="remember"
+                            class="size-3 rounded-md border-gray-200 bg-white shadow-sm"
+                            />
+    
+                            <span class="text-sm text-gray-700">
+                                Remember Me
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <a class="text-sm underline text-gray-500">
+                        Forgot Password?
+                    {{-- <a class="underline" href="">Sign up</a> --}}
+                    </a>
         
+                </div>
+                
+                <div class="flex items-center justify-center">
+
                     <button
-                    class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+                    class="group relative inline-block w-96 text-sm font-medium text-white focus:outline-none focus:ring"
                     href="/download" type="submit"
                 >
                     <span class="absolute inset-0 border border-blue-600 group-active:border-blue-500"></span>
@@ -99,6 +118,9 @@
                     </span>
                     </button>
                 </div>
+
+
+              
                 
                 <span class="relative flex justify-center">
                     <div

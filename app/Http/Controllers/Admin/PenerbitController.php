@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Penerbit;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePenerbitRequest;
 use App\Http\Requests\UpdatePenerbitRequest;
 
@@ -13,7 +14,9 @@ class PenerbitController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.penerbit.index',[
+            'penerbits' => Penerbit::latest()->get()
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class PenerbitController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.penerbit.create');
     }
 
     /**
@@ -29,7 +32,12 @@ class PenerbitController extends Controller
      */
     public function store(StorePenerbitRequest $request)
     {
-        //
+        $request->validated();
+        Penerbit::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-penerbit')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -45,7 +53,7 @@ class PenerbitController extends Controller
      */
     public function edit(Penerbit $penerbit)
     {
-        //
+        return view('pages.admin.penerbit.edit',compact('penerbit'));
     }
 
     /**
@@ -53,7 +61,12 @@ class PenerbitController extends Controller
      */
     public function update(UpdatePenerbitRequest $request, Penerbit $penerbit)
     {
-        //
+        $request->validated();
+        $penerbit->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('master-penerbit')->with('success', 'Data berhasil diubah!');
     }
 
     /**
@@ -61,6 +74,7 @@ class PenerbitController extends Controller
      */
     public function destroy(Penerbit $penerbit)
     {
-        //
+        $penerbit->delete();
+        return redirect()->route('master-penerbit')->with('success', 'Data berhasil dihapus');
     }
 }

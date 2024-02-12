@@ -14,8 +14,9 @@ class AuthController extends Controller
 
     function authenticate(AuthLoginRequest $request) {
         $credentials = $request->validated();
-
-        if (Auth::attempt($credentials)) {
+        
+        $remember = $request->has('remember') ? true : false;
+        if (Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
  
             return redirect()->route('bukus');
