@@ -8,6 +8,7 @@ use App\Models\Penerbit;
 use App\Models\Pengarang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Peminjaman;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,7 @@ class DashboardController extends Controller
             'user' => User::all()->where('role','Pengguna')->count(),
             'pengarang' => Pengarang::all()->count(),
             'penerbit' => Penerbit::all()->count(),
+            'peminjaman' => Peminjaman::all()->count(),
         ]);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Peminjaman;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePeminjamanRequest;
 use App\Http\Requests\UpdatePeminjamanRequest;
 
@@ -13,7 +14,9 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.peminjaman.index', [
+            'peminjamans' => Peminjaman::latest()->get()
+        ]);
     }
 
     /**

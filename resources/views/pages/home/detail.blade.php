@@ -88,7 +88,7 @@
           <h2 class="text-5xl font-semibold my-2">{{ $buku->judul }}</h2>
           <h2 class="text-xl text-gray-600 font-normal my-2">{{ $buku->pengarang->nama }}</h2>
           <hr class="my-2">
-          <h2>{{ $buku->deskripsi }}</h2>
+          <h2>{!! $buku->deskripsi  !!}</h2>
 
           {{-- <hr class="my-2"> --}}
           {{-- badge kategori --}}
