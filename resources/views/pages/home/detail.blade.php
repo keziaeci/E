@@ -31,17 +31,23 @@
         
             {{-- //FIXME button on small screen --}}
             @if (is_null($status))
-            <div class="">
-              <form action="{{ route('pinjam-buku', $buku->id) }}" method="POST" class="min-w-full lg:static "> 
-                @method('Post')
-                @csrf
-                <button
-                  class="inline-block border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-indigo-500"
-                >
-                  Pinjam
-                </button>
-              </form>
-            </div>
+              @if ($buku->isNotAvailable())
+              <button class="inline-block  border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:text-gray-500 focus:outline-none focus:ring focus:ring-gray-200 active:text-gray-500">
+                Buku sedang tidak tersedia
+              </button>
+              @else
+              <div class="">
+                <form action="{{ route('pinjam-buku', $buku->id) }}" method="POST" class="min-w-full lg:static "> 
+                  @method('Post')
+                  @csrf
+                  <button
+                    class="inline-block border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-indigo-500"
+                  >
+                    Pinjam
+                  </button>
+                </form>
+              </div>
+                @endif
               @else
               @switch($status->status)
                 @case("Menunggu")
