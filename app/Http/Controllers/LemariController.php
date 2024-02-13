@@ -20,7 +20,6 @@ class LemariController extends Controller
             'buku_id' => $buku->id,
             'user_id' => Auth::user()->id
         ]);
-        // Mengurangi stok buku 
         $buku->update([
             'stok' => $buku->stockOut()
         ]);
@@ -33,6 +32,11 @@ class LemariController extends Controller
         $pengembalian = Pengembalian::create([
             'tanggal_kembali' => Carbon::now(),
             'peminjaman_id' => $peminjaman->id,
+        ]);
+
+        // Menambah stok buku 
+        $buku->update([
+            'stok' => $buku->stockIn()
         ]);
 
         if($pengembalian->tanggal_kembali->greaterThan($peminjaman->tenggat_waktu)) {

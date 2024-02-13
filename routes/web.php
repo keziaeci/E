@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(LemariController::class)->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
-        Route::patch('/buku/{buku}/{peminjaman}/kembali ' , 'update')->name('kembalikan-buku');
+        Route::patch('/buku/{buku}/{peminjaman}/kembali' , 'update')->name('kembalikan-buku');
     });
     
     Route::controller(UserProfileController::class)->group(function () {

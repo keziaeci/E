@@ -66,4 +66,8 @@ class Buku extends Model
     function stockOut()  {
         return $this->stok -= 1;
     }
+
+    function stockIn()  {
+        return $this->stok += 1;
+    }
 }

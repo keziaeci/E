@@ -60,8 +60,7 @@
                   <button class="inline-block  border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500">
                     Mulai Baca  
                   </button>
-
-                  <form action="{{ route('kembalikan-buku' , [$buku->id , $peminjaman->id]) }}" method="POST">
+                  <form action="{{ route('kembalikan-buku' , [$buku->id ,$peminjaman->id]) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <button class="inline-block  border min-w-full text-center border-pink-700 bg-pink-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring active:bg-pink-500 active:text-white" type="submit">
@@ -96,7 +95,6 @@
           <hr class="my-2">
           <h2>{!! $buku->deskripsi  !!}</h2>
 
-          {{-- <hr class="my-2"> --}}
           {{-- badge kategori --}}
           <div class="my-2">
             {{-- {{ dd($buku->kategoris) }} --}}
