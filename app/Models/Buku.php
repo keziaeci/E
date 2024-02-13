@@ -46,4 +46,24 @@ class Buku extends Model
                 $query->where('nama' , 'like' , "%{$search}%");
             });
     }
+
+    // FIXME skema pertama : pending saat stok buku 0 ,
+    function checkStok()  {
+        if ($this->stok == 0 || empty($this->stok) || is_null($this->stok)) {
+            return Peminjaman::STATUS['Pending'];
+        }
+        return Peminjaman::STATUS['Borrow'];
+    }
+
+    // FIXME skema kedua : button disable saat stok buku 0
+    function isNotAvailable()  {
+        if ($this->stok == 0 || empty($this->stok) || is_null($this->stok)) {
+            return true;
+        }
+        return false;
+    }
+    
+    function stockOut()  {
+        return $this->stok -= 1;
+    }
 }

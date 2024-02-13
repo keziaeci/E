@@ -16,9 +16,13 @@ class LemariController extends Controller
         Peminjaman::create([
             'tanggal_pinjam' => Carbon::now(),
             'tenggat_waktu' => Carbon::now()->addWeek(),
-            'status' => Peminjaman::STATUS['Pending'],
+            'status' => $buku->checkStok(),
             'buku_id' => $buku->id,
             'user_id' => Auth::user()->id
+        ]);
+        // Mengurangi stok buku 
+        $buku->update([
+            'stok' => $buku->stockOut()
         ]);
 
         return redirect()->back();
