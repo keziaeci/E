@@ -117,18 +117,6 @@
                         @enderror
                     </div>
                 </div>
-                {{-- <div>
-                    <label class="sr-only" for="email">Stok</label>
-                    <input
-                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                        placeholder="Stok"
-                        
-                        type="number" min="1" max="3000" step="1"
-                        id="stok"
-                        name="stok"
-                    />
-                  
-                </div> --}}
                 <div>
                     <label class="sr-only" for="judul">Cover</label>
                     <input

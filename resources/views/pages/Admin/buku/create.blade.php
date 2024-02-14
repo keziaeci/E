@@ -79,20 +79,6 @@
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {{-- <div>
-                    <label class="sr-only" for="email">Stok</label>
-                    <input
-                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                        placeholder="Stok"
-                        type="number" min="1" max="3000" step="1"
-                        id="stok"
-                        name="stok"
-                    />
-                    <input type="number" min="1900" max="2099" step="1" />
-                    @error('stok')
-                    <p class="text-xs text-red-700">{{ $message }}</p>
-                    @enderror
-                </div> --}}
                 <div>
                     <div x-data="{ productQuantity: 1 }">
                         <label for="Quantity" class="block text-xs font-medium text-gray-700"> Stok </label>
