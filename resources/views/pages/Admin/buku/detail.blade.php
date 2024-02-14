@@ -4,9 +4,6 @@
             <dl class="-my-3 divide-y divide-gray-100 text-sm">
 
                 <div class="flex justify-between items-center gap-1 p-3 even:bg-gray-50">
-                    {{-- <dt class="font-medium text-gray-900">Title</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ $buku->judul }}</dd> --}}
-                    {{-- <button class="">DF</button> --}}
                     <div>
                         <h1 class="text-xl font-bold">Detail Buku</h1> 
                     </div>
@@ -85,6 +82,15 @@
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Penerbit</dt>
                     <dd class="text-gray-700 sm:col-span-2">{{ $buku->penerbit->nama }}</dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Stok</dt>
+                    @if ($buku->isNotAvailable())
+                        <dd class="text-gray-700 sm:col-span-2">Tidak Tersedia</dd>
+                        @else
+                        <dd class="text-gray-700 sm:col-span-2">{{ $buku->stok }}</dd>
+                    @endif                    
                 </div>
             
             

@@ -79,7 +79,7 @@
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div>
+                {{-- <div>
                     <label class="sr-only" for="email">Stok</label>
                     <input
                         class="w-full rounded-lg border-gray-200 p-3 text-sm"
@@ -88,10 +88,43 @@
                         id="stok"
                         name="stok"
                     />
-                    {{-- <input type="number" min="1900" max="2099" step="1" /> --}}
+                    <input type="number" min="1900" max="2099" step="1" />
                     @error('stok')
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
+                </div> --}}
+                <div>
+                    <div x-data="{ productQuantity: 1 }">
+                        <label for="Quantity" class="block text-xs font-medium text-gray-700"> Stok </label>
+                        <div class="flex justify-between items-center rounded border border-gray-200">
+                            <button
+                            type="button"
+                            x-on:click="productQuantity--"
+                            :disabled="productQuantity === 0"
+                            class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            >
+                            &minus;
+                            </button>
+                            <input
+                            type="number"
+                            id="Quantity"
+                            name="stok"
+                            x-model="productQuantity"
+                            class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                            />
+
+                            <button
+                            type="button"
+                            x-on:click="productQuantity++"
+                            class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            >
+                            &plus;
+                            </button>
+                        </div>
+                        @error('stok')
+                        <p class="text-xs text-red-700">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
                 <div>
                     <label class="sr-only" for="judul">Cover</label>

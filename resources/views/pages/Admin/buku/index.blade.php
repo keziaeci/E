@@ -17,7 +17,7 @@
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Genre</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pengarang</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Penerbit</th>
-                    {{-- <th class="px-4 py-2"></th> --}}
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Stok</th>
                 </tr>
             </thead>
     
@@ -36,6 +36,11 @@
                     @endif
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->pengarang->nama }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->penerbit->nama }}</td>
+                    @if ($buku->isNotAvailable())
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">Tidak Tersedia</td>
+                        @else
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->stok }}</td>
+                    @endif     
                     <td class="whitespace-nowrap px-4 py-2">
                         <a
                         href="{{ route('master-buku-detail' , $buku->id) }}"
