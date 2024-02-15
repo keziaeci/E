@@ -81,7 +81,6 @@
                         </div>
                 </article>
                 <a href="{{ route('master-peminjaman') }}">
-
                         <article class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
                                 <span class="rounded-full bg-blue-100 p-3 text-blue-600">
                                         <svg xmlns="http://www.w3.org/2000/svg"  class="h-8 w-8"  
@@ -94,6 +93,22 @@
                                 <div>
                                         <p class="text-2xl font-medium text-gray-900">{{ $peminjaman }}</p>
                                         <p class="text-sm text-gray-500">Total Peminjaman</p>
+                                </div>
+                        </article>
+                </a>
+                <a href="{{ route('master-pengembalian') }}">
+                        <article class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
+                                <span class="rounded-full bg-blue-100 p-3 text-blue-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg"  class="h-8 w-8"  
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+                                        </svg>                         
+                                </span>
+                
+                                <div>
+                                        <p class="text-2xl font-medium text-gray-900">{{ $pengembalian }}</p>
+                                        <p class="text-sm text-gray-500">Total Pengembalian</p>
                                 </div>
                         </article>
                 </a>

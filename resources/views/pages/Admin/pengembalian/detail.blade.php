@@ -18,10 +18,10 @@
 
                 <div class="flex justify-between items-center gap-1 p-3 even:bg-gray-50">
                     <div>
-                        <h1 class="text-xl font-bold">Detail Peminjaman</h1> 
+                        <h1 class="text-xl font-bold">Detail pengembalian</h1> 
                     </div>
                     <span class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
-                        <a href="{{ route('master-peminjaman-edit', $peminjaman->id) }}" class="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative" title="Edit Product">
+                        <a href="{{ route('master-pengembalian-edit', $pengembalian->id) }}" class="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative" title="Edit Product">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -38,7 +38,7 @@
                             </svg>
                         </a>
                         
-                        <form action="{{ route('master-peminjaman-delete' , $peminjaman->id) }}" method="POST">
+                        <form action="{{ route('master-pengembalian-delete' , $pengembalian->id) }}" method="POST">
                             <button onclick="return confirm('Apakah anda yakin?');" type="submit" class="inline-block p-3 text-red-700 hover:bg-red-50 focus:relative" title="Delete Product">
                             @method('delete')
                             @csrf
@@ -70,38 +70,41 @@
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Buku</dt>
-                    <a href="{{ route('master-buku-detail',$peminjaman->buku_id) }}">
-                        <dd class="text-gray-700 underline sm:col-span-2">{{ $peminjaman->buku->judul }}</dd>
+                    <a href="{{ route('master-buku-detail',$pengembalian->peminjaman->buku_id) }}">
+                        <dd class="text-gray-700 underline sm:col-span-2">{{ $pengembalian->peminjaman->buku->judul }}</dd>
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Peminjam</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ $peminjaman->user->name }}</dd>
+                    <dd class="text-gray-700 sm:col-span-2">{{ $pengembalian->peminjaman->user->name }}</dd>
                 </div>
             
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                    <dt class="font-medium text-gray-900">Tanggal Pinjam</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ date('H:m:s, d-m-Y', strtotime($peminjaman->tanggal_pinjam)) }}</dd>
+                    <dt class="font-medium text-gray-900">Tanggal Kembali</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{ date('H:m:s, d-m-Y', strtotime($pengembalian->tanggal_kembali)) }}</dd>
                 </div>
 
                 {{-- <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Genre</dt>
                     <dd class="text-gray-700 sm:col-span-2">
-                        @foreach ($peminjaman->kategoris as $kategori)
+                        @foreach ($pengembalian->kategoris as $kategori)
                         {{ $kategori->nama }}
                         @endforeach
                     </dd>
                 </div> --}}
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                    <dt class="font-medium text-gray-900">Tenggat Waktu</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ date('H:m:s, d-m-Y', strtotime($peminjaman->tenggat_waktu)) }}</dd>
+                    <dt class="font-medium text-gray-900">Detail Peminjaman</dt>
+                    <a href="{{ route('master-peminjaman-detail',$pengembalian->peminjaman_id) }}">
+                        <dd class="text-gray-700 underline sm:col-span-2">{{ $pengembalian->peminjaman_id }}</dd>
+                    </a>
+                    {{-- <dd class="text-gray-700 sm:col-span-2">{{ $pengembalian->peminjaman_id }}</dd> --}}
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Status</dt>
-                    @switch($peminjaman->status)
+                    @switch($pengembalian->peminjaman->status)
                         @case('Sudah Dikembalikan')
                         <dd class="text-gray-700 sm:col-span-2">
                             <span
@@ -175,15 +178,15 @@
             
                 {{-- <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Penerbit</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ $peminjaman->penerbit->nama }}</dd>
+                    <dd class="text-gray-700 sm:col-span-2">{{ $pengembalian->penerbit->nama }}</dd>
                 </div> --}}
 
                 {{-- <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Stok</dt>
-                    @if ($peminjaman->isNotAvailable())
+                    @if ($pengembalian->isNotAvailable())
                         <dd class="text-gray-700 sm:col-span-2">Tidak Tersedia</dd>
                         @else
-                        <dd class="text-gray-700 sm:col-span-2">{{ $peminjaman->stok }}</dd>
+                        <dd class="text-gray-700 sm:col-span-2">{{ $pengembalian->stok }}</dd>
                     @endif                    
                 </div> --}}
             
@@ -191,7 +194,7 @@
                 {{-- <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Sinopsis</dt>
                     <dd class="text-gray-700 sm:col-span-2">
-                    {!! $peminjaman->deskripsi !!}
+                    {!! $pengembalian->deskripsi !!}
                     </dd>
                 </div> --}}
             </dl>

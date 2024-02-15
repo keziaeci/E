@@ -9,6 +9,7 @@ use App\Models\Pengarang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
+use App\Models\Pengembalian;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,7 @@ class DashboardController extends Controller
             'pengarang' => Pengarang::all()->count(),
             'penerbit' => Penerbit::all()->count(),
             'peminjaman' => Peminjaman::all()->count(),
+            'pengembalian' => Pengembalian::all()->count(),
         ]);
     }
 }

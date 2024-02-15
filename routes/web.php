@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\PeminjamanController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\PengarangController;
+use App\Http\Controllers\Admin\PengembalianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -115,6 +116,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/master/peminjaman/store', 'store')->name('master-peminjaman-store');
             Route::patch('/master/peminjaman/{peminjaman}/update', 'update')->name('master-peminjaman-update');
             Route::delete('/master/peminjaman/{peminjaman}/delete', 'destroy')->name('master-peminjaman-delete');
+        });
+        
+        Route::controller(PengembalianController::class)->group(function () {
+            Route::get('/master/pengembalian', 'index')->name('master-pengembalian');
+            Route::get('/master/pengembalian/create', 'create')->name('master-pengembalian-create');
+            Route::get('/master/pengembalian/{pengembalian}/detail', 'show')->name('master-pengembalian-detail');
+            Route::get('/master/pengembalian/{pengembalian}/edit', 'edit')->name('master-pengembalian-edit');
+            Route::post('/master/pengembalian/store', 'store')->name('master-pengembalian-store');
+            Route::patch('/master/pengembalian/{pengembalian}/update', 'update')->name('master-pengembalian-update');
+            Route::delete('/master/pengembalian/{pengembalian}/delete', 'destroy')->name('master-pengembalian-delete');
         });
 
     });

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Pengembalian;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePengembalianRequest;
 use App\Http\Requests\UpdatePengembalianRequest;
 
@@ -13,7 +14,9 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.pengembalian.index', [
+            'pengembalians' => Pengembalian::latest()->get()
+        ]);
     }
 
     /**
@@ -37,7 +40,7 @@ class PengembalianController extends Controller
      */
     public function show(Pengembalian $pengembalian)
     {
-        //
+        return view('pages.admin.pengembalian.detail',compact('pengembalian'));
     }
 
     /**
