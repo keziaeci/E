@@ -18,13 +18,13 @@ class AuthController extends Controller
         $remember = $request->has('remember') ? true : false;
         if (Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
- 
+            
             return redirect()->route('bukus');
         }
- 
+        
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+            'error' => 'The provided credentials do not match our records.',
+        ])->onlyInput(['error']);
     }
     
     function logout(Request $request) {

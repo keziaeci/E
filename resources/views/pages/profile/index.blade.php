@@ -65,6 +65,12 @@
                             Dikembalikan
                         </button>
                     </form>
+
+                    <form action="{{ route('profil-user') }}">
+                        <button name="status" value="Dikembalikan Terlambat" class="shrink-0 rounded-lg p-2 text-sm font-medium  {{ request()->query('status') == 'Dikembalikan Terlambat' ? ' bg-gray-100  text-gray-700' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700' }}">
+                            Terlambat Mengembalikan
+                        </button>
+                    </form>
             
                 </nav>
             </div>
@@ -72,14 +78,19 @@
         
         <div class="grid grid-cols-2 gap-5 px-3 my-2 md:grid-cols-4 md:px-4 md:gap-2 lg:grid-cols-6 lg:p-0 lg:my-3 lg:gap-4">
 
-
-            @foreach ($bukus as $buku)
-            <x-book-card 
-                :id="$buku->buku->id"
-                :judul="$buku->buku->judul"
-                :pengarang="$buku->buku->pengarang->nama"
-            />
-            @endforeach
+            @if ($bukus->isEmpty())
+                <div class="">
+                    <p class=" text-sm text-gray-500">Tidak ada data</p>                
+                </div>
+            @else
+                @foreach ($bukus as $buku)
+                <x-book-card 
+                    :id="$buku->buku->id"
+                    :judul="$buku->buku->judul"
+                    :pengarang="$buku->buku->pengarang->nama"
+                />
+                @endforeach
+            @endif
 
         </div>
 

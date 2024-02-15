@@ -18,8 +18,13 @@
                     id="name"
                     name="name"
                     />
+                    @error('name')
+                    <div class="m-2">
+                        <p class="text-xs text-red-700">{{ $message }}</p>
+                    </div>
+                    @enderror
                 </div>
-                
+
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
                         <label class="sr-only" for="username">Username</label>
@@ -31,6 +36,11 @@
                         id="username"
                         name="username"
                         />
+                        @error('username')
+                        <div class="m-2">
+                            <p class="text-xs text-red-700">{{ $message }}</p>
+                        </div>
+                        @enderror
                     </div>
 
                     <div>
@@ -43,7 +53,13 @@
                             id="email"
                             name="email"
                         />
+                        @error('email')
+                        <div class="m-2">
+                            <p class="text-xs text-red-700">{{ $message }}</p>
+                        </div>
+                        @enderror
                     </div>
+
                 </div>
 
                 <div class="mt-4">

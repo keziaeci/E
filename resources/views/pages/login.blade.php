@@ -42,7 +42,7 @@
                             />
                             </svg>
                         </span>
-                    </div>
+                    </div> 
                 </div>
                 
                 <div>
@@ -80,7 +80,11 @@
                         </span>
                     </div>
                 </div>
-                
+                @error('error')
+                <div class="px-5">
+                    <p class="text-xs text-red-700">{{ $message }}</p>
+                </div>
+                @enderror
                 <div class="flex items-center justify-between">
                     <div class="px-5">
                         <label for="remember" class="flex gap-2 items-center">

@@ -5,21 +5,6 @@
         href="{{ url()->previous() }}"
         >
             <span class="sr-only"> Download </span>
-        
-            {{-- <svg
-            class="size-5 rtl:rotate-180"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            >
-                <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-            </svg> --}}
             <svg 
             width="15" height="15" 
             viewBox="0 0 15 15" 
@@ -28,6 +13,7 @@
                 <path d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
             </svg>
         </a>
+        {{-- {{ \Carbon\Carbon::now('Asia/Jakarta') }} --}}
         <div class="flow-root rounded-lg border border-gray-100 py-3 mt-5 shadow-sm">
             <dl class="-my-3 divide-y divide-gray-100 text-sm">
 
