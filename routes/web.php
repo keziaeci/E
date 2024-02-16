@@ -29,7 +29,7 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest','nocache'])->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'index')->name('login');
         Route::post('/login/auth', 'authenticate')->name('auth');
@@ -38,7 +38,9 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::middleware(['nocache'])->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
     
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('bukus');

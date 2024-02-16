@@ -1,7 +1,6 @@
 <x-app-layout>
 
   <x-home-header/>
-
   {{-- body --}}
   {{-- buku terbaru --}}
   <div class="m-3 lg:mx-36 lg:my-8">

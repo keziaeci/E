@@ -6,7 +6,6 @@ use App\Models\Buku;
 use App\Models\User;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
