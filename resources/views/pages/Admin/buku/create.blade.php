@@ -2,7 +2,7 @@
 
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
         <h1 class="text-xl font-bold">Tambah Buku</h1>
-        <form action="{{ route('master-buku-store', Auth::user()->id) }}" method="POST" class="space-y-4">
+        <form action="{{ route('master-buku-store', Auth::user()->id) }}" method="POST" class="space-y-4" enctype="multipart/form-data">
             @csrf
             @method('POST')
             
@@ -43,12 +43,11 @@
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Pengarang </label>
-                    {{-- <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Headliner </label> --}}
+                    <label for="pengarang" class="block text-xs font-medium text-gray-700"> Pengarang </label>
                     
                     <select
                     name="pengarang"
-                    id="HeadlineAct"
+                    id="pengarang"
                     class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Pengarang</option>
@@ -61,8 +60,8 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Penerbit </label>
-                    <select name="penerbit" id="HeadlineAct"
+                    <label for="penerbit" class="block text-xs font-medium text-gray-700"> Penerbit </label>
+                    <select name="penerbit" id="penerbit"
                         class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Penerbit</option>
@@ -113,11 +112,11 @@
                     </div>
                 </div>
                 <div>
-                    <label class="sr-only" for="judul">Cover</label>
+                    <label for="cover" class="block text-xs font-medium text-gray-700"> Cover </label>
                     <input
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Cover"
-                    type="text"
+                    type="file"
                     id="cover"
                     name="cover"
                     />
@@ -130,9 +129,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="form-control">
-                    <label class="label">
-                        {{-- <span class="label-text">Tulis</span> --}}
-                    </label>
+                    <label for="editor" class="block text-xs font-medium text-gray-700"> Deskripsi </label>
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
                     </textarea>
                     @error('deksripsi')
@@ -140,12 +137,12 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Kategori </label>
+                    <label for="kategori" class="block text-xs font-medium text-gray-700"> Kategori </label>
                     {{-- <label for="HeadlineAct" class="block text-sm font-medium text-gray-900"> Headliner </label> --}}
                     
                     <select
                     name="kategori"
-                    id="HeadlineAct"
+                    id="kategori"
                     class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Kategori</option>

@@ -41,19 +41,21 @@ class BukuController extends Controller
     public function store(StoreBukuRequest $request)
     {
         // dd($request);
-        $credentials = $request->validated();
+        $request->validated();
+
+        $cover = $request->file('cover')->storePublicly('files/cover','public');
 
         $buku =  Buku::create([
-            'judul' => $credentials['judul'],
-            'tahun_terbit' => $credentials['tahun_terbit'],
-            'penerbit_id' => $credentials['penerbit'],
-            'pengarang_id' => $credentials['pengarang'],
-            'stok' => $credentials['stok'],
-            'cover' => $credentials['cover'],
-            'deskripsi' => $credentials['deskripsi'],
+            'judul' => $request->judul,
+            'tahun_terbit' => $request->tahun_terbit,
+            'penerbit_id' => $request->penerbit,
+            'pengarang_id' => $request->pengarang,
+            'stok' => $request->stok,
+            'cover' => $cover,
+            'deskripsi' => $request->deskripsi,
         ]);
 
-        $buku->kategoris()->attach($credentials['kategori']);
+        $buku->kategoris()->attach($request->kategori);
         
         return redirect()->route('master-buku')->with('success', 'Data berhasil ditambahkan');
     }

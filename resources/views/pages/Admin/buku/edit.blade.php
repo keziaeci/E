@@ -42,11 +42,11 @@
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Pengarang </label>
+                    <label for="pengarang" class="block text-xs font-medium text-gray-700"> Pengarang </label>
                     
                     <select
                     name="pengarang"
-                    id="HeadlineAct"
+                    id="pengarang"
                     class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Pengarang</option>
@@ -63,8 +63,8 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Penerbit </label>
-                    <select name="penerbit" id="HeadlineAct"
+                    <label for="penerbit" class="block text-xs font-medium text-gray-700"> Penerbit </label>
+                    <select name="penerbit" id="penerbit"
                         class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Penerbit</option>
@@ -118,12 +118,20 @@
                     </div>
                 </div>
                 <div>
-                    <label class="sr-only" for="judul">Cover</label>
-                    <input
+                    {{-- <input
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Cover"
                     value="{{ old('cover',$buku->cover) }}"
                     type="text"
+                    id="cover"
+                    name="cover"
+                    /> --}}
+                    <label for="cover" class="block text-xs font-medium text-gray-700"> Cover </label>
+                    <input
+                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                    placeholder="Cover"
+                    type="file"
+                    value="{{ old('cover',$buku->cover) }}"
                     id="cover"
                     name="cover"
                     />
@@ -134,10 +142,9 @@
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
+                
                 <div class="form-control">
-                    <label class="label">
-                    </label>
+                    <label for="editor" class="block text-xs font-medium text-gray-700"> Deskripsi </label>
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
                         {{   old('deskripsi', $buku->deskripsi)    }}
                     </textarea>
