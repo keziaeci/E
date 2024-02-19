@@ -25,7 +25,7 @@
                         </div>
                         @enderror
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="image" class="block text-xs font-medium text-gray-700"> Profile Picture </label>
                         <input
                         class="w-full rounded-lg border-gray-200 p-3 text-sm"
@@ -34,7 +34,7 @@
                         id="image"
                         name="image"
                         />
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">

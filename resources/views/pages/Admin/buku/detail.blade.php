@@ -60,6 +60,7 @@
                             {{-- <img src="{{ asset('/storage/' . $buku->cover) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt=""> --}}
                             {{-- @endif --}}
 
+                            {{-- <img src="{{ asset('/storage/' . $buku->images[0]->filename) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt=""> --}}
                             @foreach ($buku->images as $image)
                             <img src="{{ asset('/storage/' . $image->filename) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
                             @endforeach

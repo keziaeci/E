@@ -15,6 +15,7 @@
             @foreach ($data as $d)
             <x-book-card
             :id="$d->id"
+            :cover="$d->images[0]->filename"
             :judul="$d->judul"
             :pengarang="$d->pengarang->nama"
             /> 
@@ -27,6 +28,7 @@
             @foreach ($bukus as $buku)
             <x-book-card
             :id="$buku->id"
+            :cover="$buku->images[0]->filename"
             :judul="$buku->judul"
             :pengarang="$buku->pengarang->nama"
             /> 

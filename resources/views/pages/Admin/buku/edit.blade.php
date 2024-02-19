@@ -71,8 +71,9 @@
                     @foreach ($penerbits as $penerbit)
                         @if ($buku->penerbit_id == $penerbit->id)
                         <option value="{{ $penerbit->id }}" selected>{{ $penerbit->nama }}</option>
+                            @else
+                            <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                         @endif
-                        <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                     @endforeach
                     </select>
                     @error('penerbit')

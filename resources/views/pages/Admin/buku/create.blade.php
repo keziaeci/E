@@ -159,8 +159,9 @@
                     @foreach ($kategoris as $kategori)
                         @if (old('kategori') == $kategori->id)
                         <option value="{{ $kategori->id }}" selected>{{ $kategori->nama }}</option>
+                            @else
+                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                         @endif
-                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                     @endforeach
                     </select>
                     @error('kategori')

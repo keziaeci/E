@@ -107,15 +107,18 @@ class BukuController extends Controller
             'stok' => $request->stok,
             'deskripsi' => $request->deskripsi,
         ]);
-
-        foreach ($request->file('cover') as $filecover) {
-            $cover = $filecover->storePublicly('files/cover','public');
-            $buku->images()->create([
-                'filename' => $cover,
-                'imageable_id' => $buku->id,
-                'imageable_type' => '\App\Models\Buku'
-            ]);
+        // dd(empty($request->file('cover')));
+        if (!empty($request->file('cover'))) {
+            foreach ($request->file('cover') as $filecover) {
+                $cover = $filecover->storePublicly('files/cover','public');
+                $buku->images()->create([
+                    'filename' => $cover,
+                    'imageable_id' => $buku->id,
+                    'imageable_type' => '\App\Models\Buku'
+                ]);
+            }
         }
+
         return redirect()->route('master-buku')->with('success', 'Data berhasil diubah');
 
     }
