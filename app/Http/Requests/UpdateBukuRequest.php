@@ -27,7 +27,8 @@ class UpdateBukuRequest extends FormRequest
             'pengarang' => 'required',
             'penerbit' => 'required',
             'stok' => 'nullable',
-            'cover' => 'nullable',
+            'cover.*' => 'nullable',
+            'cover' => 'nullable|array|min:1',
             'deskripsi' => 'required',
         ];
         // if ($this->input('judul') != $this->buku->judul) {

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBukuRequest extends FormRequest
+class UpdateImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,15 +22,7 @@ class StoreBukuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required',
-            'tahun_terbit' => 'required',
-            'pengarang' => 'required',
-            'penerbit' => 'required',
-            'stok' => 'nullable',
-            'cover.*' => 'required',
-            'cover' => 'required|array|min:1',
-            'deskripsi' => 'required',
-            'kategori' => 'required',
+            //
         ];
     }
 }

@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
         <h1 class="text-xl font-bold">Ubah Buku</h1>
-        <form action="{{ route('master-buku-update',  $buku->id) }}" method="POST" class="space-y-4">
+        <form action="{{ route('master-buku-update',  $buku->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             @method('patch')
             
@@ -131,9 +131,9 @@
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Cover"
                     type="file"
-                    value="{{ old('cover',$buku->cover) }}"
                     id="cover"
-                    name="cover"
+                    name="cover[]"
+                    multiple="multiple"
                     />
                 </div>
                 @error('cover')
@@ -165,8 +165,22 @@
                 </button>
             </div>
         </form>
-
     </div>
+    
+    <div class="rounded-lg bg-white m-5 p-8 shadow-lg flex lg:col-span-3 lg:p-12">
+        <h1 class="text-xl font-bold">Cover</h1>
+        @foreach ($buku->images as $image)
+        <div class="inline">
+            <img src="{{ '/storage/' . $image->filename }}" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
+            <form action="{{ route('master-buku-cover-delete', [$buku->id, $image->id]) }}" class="block" method="POST">
+                @method('DELETE')
+                @csrf
+                <button  class="underline text-red-500">Delete</button>
+            </form>
+        </div>
+        @endforeach
+    </div>
+
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ), {

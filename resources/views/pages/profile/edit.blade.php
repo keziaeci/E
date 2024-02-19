@@ -8,21 +8,33 @@
             <form action="{{ route('simpan-profil', Auth::user()->id) }}" method="POST" class="space-y-4">
                 @csrf
                 @method('PATCH')
-                <div>
-                    <label class="sr-only" for="name">Name</label>
-                    <input
-                    value="{{ Auth::user()->name }}"
-                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                    placeholder="Name"
-                    type="text"
-                    id="name"
-                    name="name"
-                    />
-                    @error('name')
-                    <div class="m-2">
-                        <p class="text-xs text-red-700">{{ $message }}</p>
+                <div  class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                        <label class="sr-only" for="name">Name</label>
+                        <input
+                        value="{{ Auth::user()->name }}"
+                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                        placeholder="Name"
+                        type="text"
+                        id="name"
+                        name="name"
+                        />
+                        @error('name')
+                        <div class="m-2">
+                            <p class="text-xs text-red-700">{{ $message }}</p>
+                        </div>
+                        @enderror
                     </div>
-                    @enderror
+                    <div>
+                        <label for="image" class="block text-xs font-medium text-gray-700"> Profile Picture </label>
+                        <input
+                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                        placeholder="image"
+                        type="file"
+                        id="image"
+                        name="image"
+                        />
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">

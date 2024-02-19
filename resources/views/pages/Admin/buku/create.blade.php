@@ -15,6 +15,7 @@
                     <input
                     type="text"
                     id="judul"
+                    value="{{ old('judul') }}"
                     placeholder="Judul"
                     name="judul"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"
@@ -32,6 +33,7 @@
                         placeholder="Tahun Terbit"
                         type="number" min="1000" max="3000" step="1"
                         id="tahun_terbit"
+                        value="{{ old('tahun_terbit') }}"
                         name="tahun_terbit"
                     />
                     {{-- <input type="number" min="1900" max="2099" step="1" /> --}}
@@ -52,6 +54,9 @@
                     >
                     <option @selected(true) disabled="disabled">Pengarang</option>
                     @foreach ($pengarangs as $pengarang)
+                    @if (old('pengarang') == $pengarang->id)
+                        <option value="{{ $pengarang->id }}" selected>{{ $pengarang->nama }}</option>
+                        @endif
                     <option value="{{ $pengarang->id }}">{{ $pengarang->nama }}</option>
                     @endforeach
                     </select>
@@ -66,6 +71,9 @@
                     >
                     <option @selected(true) disabled="disabled">Penerbit</option>
                     @foreach ($penerbits as $penerbit)
+                        @if (old('penerbit') == $penerbit->id)
+                        <option value="{{ $penerbit->id }}" selected>{{ $penerbit->nama }}</option>
+                        @endif
                         <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                     @endforeach
                     </select>
@@ -79,7 +87,7 @@
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <div x-data="{ productQuantity: 1 }">
+                    <div x-data="{ productQuantity: {{ old('stok', 1) }} }">
                         <label for="Quantity" class="block text-xs font-medium text-gray-700"> Stok </label>
                         <div class="flex justify-between items-center rounded border border-gray-200">
                             <button
@@ -92,6 +100,7 @@
                             </button>
                             <input
                             type="number"
+                            value="{{ old('stok') }}"
                             id="Quantity"
                             name="stok"
                             x-model="productQuantity"
@@ -118,12 +127,13 @@
                     placeholder="Cover"
                     type="file"
                     id="cover"
-                    name="cover"
+                    name="cover[]"
+                    multiple="multiple"
                     />
+                    @error('cover')
+                    <p class="text-xs text-red-700">{{ $message }}</p>
+                    @enderror
                 </div>
-                @error('cover')
-                <p class="text-xs text-red-700">{{ $message }}</p>
-                @enderror
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -132,7 +142,7 @@
                     <label for="editor" class="block text-xs font-medium text-gray-700"> Deskripsi </label>
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
                     </textarea>
-                    @error('deksripsi')
+                    @error('deskripsi')
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
                 </div>
@@ -147,6 +157,9 @@
                     >
                     <option @selected(true) disabled="disabled">Kategori</option>
                     @foreach ($kategoris as $kategori)
+                        @if (old('kategori') == $kategori->id)
+                        <option value="{{ $kategori->id }}" selected>{{ $kategori->nama }}</option>
+                        @endif
                     <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
                     @endforeach
                     </select>

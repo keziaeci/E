@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Buku;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBukuRequest;
-use App\Http\Requests\UpdateBukuRequest;
+use App\Models\Image;
 use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Pengarang;
 use PhpParser\Node\Stmt\Return_;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBukuRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateBukuRequest;
 
 class BukuController extends Controller
 {
@@ -40,10 +42,8 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
-        // dd($request);
+        // dd($request->file('cover'));
         $request->validated();
-
-        $cover = $request->file('cover')->storePublicly('files/cover','public');
 
         $buku =  Buku::create([
             'judul' => $request->judul,
@@ -51,9 +51,18 @@ class BukuController extends Controller
             'penerbit_id' => $request->penerbit,
             'pengarang_id' => $request->pengarang,
             'stok' => $request->stok,
-            'cover' => $cover,
+            // 'cover' => $cover,
             'deskripsi' => $request->deskripsi,
         ]);
+        // Image::create();
+        foreach ($request->file('cover') as $filecover) {
+            $cover = $filecover->storePublicly('files/cover','public');
+            $buku->images()->create([
+                'filename' => $cover,
+                'imageable_id' => $buku->id,
+                'imageable_type' => '\App\Models\Buku'
+            ]);
+        }
 
         $buku->kategoris()->attach($request->kategori);
         
@@ -65,7 +74,10 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        return view('pages.admin.buku.detail', compact('buku'));
+        return view('pages.admin.buku.detail',[
+            'buku' => $buku,
+            'images' => Image::all()
+        ]);
     }
 
     /**
@@ -84,7 +96,7 @@ class BukuController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateBukuRequest $request, Buku $buku)
-    {
+    {   
         $request->validated();
 
         $buku->update([
@@ -93,10 +105,17 @@ class BukuController extends Controller
             'pengarang_id' => $request->pengarang,
             'penerbit_id' => $request->penerbit,
             'stok' => $request->stok,
-            'cover' => $request->cover,
             'deskripsi' => $request->deskripsi,
         ]);
 
+        foreach ($request->file('cover') as $filecover) {
+            $cover = $filecover->storePublicly('files/cover','public');
+            $buku->images()->create([
+                'filename' => $cover,
+                'imageable_id' => $buku->id,
+                'imageable_type' => '\App\Models\Buku'
+            ]);
+        }
         return redirect()->route('master-buku')->with('success', 'Data berhasil diubah');
 
     }
@@ -105,8 +124,20 @@ class BukuController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Buku $buku)
-    {
+    {   
+        // // dd($buku->images);
+        foreach ($buku->images as $cover) {
+            Storage::disk('public')->delete($cover->filename);
+            $cover->delete();
+        } 
+        // $buku->images()->delete();
         $buku->delete();
         return redirect()->route('master-buku')->with('success', 'Data berhasil dihapus');
+    }
+
+    function coverDelete(Buku $buku , Image $image)  {
+        Storage::disk('public')->delete($image->filename);
+        $image->delete();
+        return redirect()->back();
     }
 }

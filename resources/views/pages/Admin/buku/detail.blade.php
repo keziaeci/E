@@ -51,11 +51,18 @@
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Cover</dt>
                     <dd class="text-gray-700 sm:col-span-2">
-                        @if (empty($buku->cover))
+                        {{-- @if (empty($buku->cover))
                         <img src="https://archive.org/services/img/lccn_078073006991" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
-                            @else
-                            <img src="{{ asset('/storage/' . $buku->cover) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
-                        @endif
+                            @else --}}
+                            {{-- @foreach ($images as $image)
+                                {{ dd($image->imageable) }}
+                            @endforeach --}}
+                            {{-- <img src="{{ asset('/storage/' . $buku->cover) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt=""> --}}
+                            {{-- @endif --}}
+
+                            @foreach ($buku->images as $image)
+                            <img src="{{ asset('/storage/' . $image->filename) }}" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
+                            @endforeach
                     </dd>
                 </div>
 

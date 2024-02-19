@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/master/buku/store', 'store')->name('master-buku-store');
             Route::patch('/master/buku/{buku}/update', 'update')->name('master-buku-update');
             Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
+            Route::delete('/master/buku/{buku}/{image}/delete', 'coverDelete')->name('master-buku-cover-delete');
         });  
         
         Route::controller(PengarangController::class)->group(function () {

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('penerbit_id')->constrained()->cascadeOnDelete();
         $table->foreignId('pengarang_id')->constrained()->cascadeOnDelete();
             $table->integer('stok')->nullable();
-            $table->string('cover')->nullable();
             $table->text('deskripsi');
             $table->timestamps();
         });
