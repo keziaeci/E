@@ -13,6 +13,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['nocache'])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
-    
+
+    Route::get('/backup', [Controller::class, 'backup'])->name('backup');
+
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('bukus');
         Route::get('/buku/{buku}/detail', 'show')->name('detail-buku');
