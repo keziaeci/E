@@ -33,6 +33,8 @@ Route::get('/', function () {
 Route::middleware(['guest','nocache'])->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'index')->name('login');
+        Route::get('/register', 'create')->name('register');
+        Route::post('/register/store', 'store')->name('register-store');
         Route::post('/login/auth', 'authenticate')->name('auth');
     });
 
