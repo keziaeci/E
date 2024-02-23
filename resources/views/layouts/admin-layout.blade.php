@@ -151,7 +151,7 @@
                       <div class="relative hidden sm:block">
                         <label class="sr-only" for="search"> Search </label>
                         
-                        <form action="{{ route('cari-buku') }}" method="GET">
+                        {{-- <form action="{{ route('cari-buku') }}" method="GET">
                           <input
                           class="h-10 w-full rounded-lg border-none bg-white pe-10 ps-4 text-sm shadow-sm sm:w-56"
                           id="search"
@@ -180,7 +180,7 @@
                             />
                           </svg>
                         </button>
-                        </form>
+                        </form> --}}
                       </div>
               
                       {{-- ketika layar kecil --}}

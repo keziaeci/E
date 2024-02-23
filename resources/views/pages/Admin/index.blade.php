@@ -1,13 +1,5 @@
 <x-admin-layout>
-        <div class="m-2">
-                <a
-                class="inline-block rounded border border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-black"
-                href="{{ route('backup') }}"
-                >
-                Download
-                </a>
-        </div>
-        <div class="flex flex-wrap gap-2 p-2">
+        <div class="grid grid-flow-row md:grid-cols-3 lg:grid-flow-col gap-2 p-2">
                 <a href="{{ route('master-buku') }}">
                         <article class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6">
                                 <span class="rounded-full bg-blue-100 p-3 text-blue-600">
@@ -107,6 +99,59 @@
                                         <p class="text-sm text-gray-500">Total Pengembalian</p>
                                 </div>
                         </article>
+                </a>
+        </div>
+        @if (session()->has('backupSuccess'))
+        <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20  top-10 rounded-xl border border-gray-100 bg-white p-4">
+        
+                <div class="flex items-start gap-4">
+                        <span class="text-green-600">
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-6 w-6"
+                        >
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                        </svg>
+                        </span>
+                        
+                        <div class="flex-1">
+                        <strong class="block font-medium text-gray-900"> Berhasil </strong>
+                
+                
+                        <p class="mt-1 text-sm text-gray-700">{{ session('backupSuccess') }}</p>
+                        </div>
+                        
+                        <button @click="open = false " class="text-gray-500 transition hover:text-gray-600">
+                        <span class="sr-only">Dismiss popup</span>
+                
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-6 w-6"
+                        >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        </button>
+                </div>
+        </div>
+        @endif
+        <div class="m-2 lg:float-end">
+                <a
+                class="inline-block rounded border border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-black"
+                href="{{ route('backup') }}"
+                >
+                Backup Database
                 </a>
         </div>
         {{-- <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tempore nobis reprehenderit animi recusandae corporis nam veniam iure veritatis inventore mollitia maiores eius sequi distinctio accusamus ipsa, nulla sunt soluta eveniet. Nemo labore facere eos dolorum, ullam suscipit dolor esse eaque ex necessitatibus quidem placeat doloribus iste distinctio aspernatur accusantium minus. Aut, reiciendis libero rem tenetur quod, saepe provident unde vitae ratione ducimus aliquid? Unde, dolorem. Magni inventore laborum voluptate! Nesciunt delectus dolores eaque, totam error autem reiciendis, eveniet vero suscipit quae omnis iusto similique neque ad possimus, dolorum soluta est quidem officiis deleniti aliquam! Exercitationem corporis porro quia reiciendis!</h1> --}}
