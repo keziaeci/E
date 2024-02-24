@@ -30,7 +30,8 @@ class StoreBukuRequest extends FormRequest
             'cover.*' => 'required',
             'cover' => 'required|array|min:1',
             'deskripsi' => 'required',
-            'kategori' => 'required',
+            'kategoris_id' => 'required|array|min:1',
+            'kategoris_id.*' => 'required|exists:kategoris,id',
         ];
     }
 }

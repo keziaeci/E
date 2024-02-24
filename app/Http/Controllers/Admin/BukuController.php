@@ -43,6 +43,7 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
+        // dd($request);
         $request->validated();
 
         $buku =  Buku::create([
@@ -63,7 +64,7 @@ class BukuController extends Controller
             ]);
         }
 
-        $buku->kategoris()->attach($request->kategori);
+        $buku->kategoris()->attach($request->kategoris_id);
         
         return redirect()->route('master-buku')->with('success', 'Data berhasil ditambahkan');
     }
@@ -88,6 +89,7 @@ class BukuController extends Controller
             'buku' => $buku,
             'pengarangs' => Pengarang::all(),
             'penerbits' => Penerbit::all(),
+            'kategoris' => Kategori::all(),
         ]);
     }
 
@@ -107,6 +109,8 @@ class BukuController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
+        $buku->kategoris()->sync($request->kategoris_id);
+        
         if (!empty($request->file('cover'))) {
             foreach ($request->file('cover') as $filecover) {
                 $cover = $filecover->storePublicly('files/cover','public');
