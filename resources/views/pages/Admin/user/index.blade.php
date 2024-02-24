@@ -18,7 +18,7 @@
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nama</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Username</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Email</th>
-                    {{-- <th class="px-4 py-2"></th> --}}
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
                 </tr>
             </thead>
     
@@ -29,14 +29,7 @@
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $user->username }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $user->email }}</td>
                     <td class="whitespace-nowrap px-4 py-2">
-                        {{-- <a
-                        href="{{ route('master-user-detail' , $user->id) }}"
-                        class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                        >
-                        Detail
-                        </a> --}}
                         <span class="inline-flex">
-
                             <a 
                             href="{{ route('master-user-edit', $user->id) }}"
                             class="inline-block border-e p-3 text-gray-700 bg-gray-100 rounded hover:bg-gray-200 focus:relative" title="Edit Product">
@@ -84,6 +77,52 @@
             </tbody>
         </table>
     </div>
+
+    {{-- Trashed data --}}
+    <div class="mx-10">
+        <h1 class="font-semibold">User yang dihapus</h1>
+    </div>
+    <div class="overflow-auto mx-10 my-5 rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead class="ltr:text-left rtl:text-right">
+                <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nama</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Username</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Email</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
+                </tr>
+            </thead>
+    
+            <tbody class="divide-y divide-gray-200">
+                @if ($trashes->isEmpty())
+                    <tr class="flex justify-center">
+                        <td>Tidak ada data</td>
+                    </tr>
+                @else
+                @foreach ($trashes as $trash)
+                <tr class="odd:bg-gray-50">
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->name }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->username }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->email }}</td>
+                    <td class="whitespace-nowrap px-4 py-2">
+                        <a
+                        href="{{ route('master-user-restore' , $trash->id) }}"
+                        class="inline-block rounded bg-yellow-400 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-500"
+                        >
+                        Pulihkan
+                        </a>
+                        <a
+                        href="{{ route('master-user-force-delete' , $trash->id) }}" onclick="return confirm('Anda yakin ingin menghapus data ini secara permanen?')"
+                        class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-600"
+                        >
+                        Hapus Permanen
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+            </tbody>
+        </table>
 
     {{-- //FIXME success alert position after inserting data --}}
     @if (session()->has('success'))

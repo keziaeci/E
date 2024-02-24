@@ -18,15 +18,24 @@
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pengarang</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Penerbit</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Stok</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
                 </tr>
             </thead>
     
             <tbody class="divide-y divide-gray-200">
+                {{-- {{ dd() }} --}}
+                @if ($bukus->isEmpty())
+                <tr class="bg-gray-50">
+                    <td>Tidak ada buku</td>
+                </tr>
+                @else
                 @foreach ($bukus as $buku)
                 <tr class="odd:bg-gray-50">
+                        {{-- {{ dd($buku->kategoris()->withTrashed()->get()) }} --}}
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $buku->judul }}</td>
                     @if ($buku->kategoris->isEmpty())
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">-</td>
+                    {{-- <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">{{ $buku->kategoris()->withTrashed()->pluck('nama')->first() }}</td> --}}
                     @else
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">
                         @foreach ($buku->kategoris as $kategori)
@@ -34,8 +43,8 @@
                         @endforeach
                     </td>
                     @endif
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->pengarang->nama }}</td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->penerbit->nama }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->pengarang()->withTrashed()->pluck('nama')->first() }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $buku->penerbit()->withTrashed()->pluck('nama')->first() }}</td>
                     @if ($buku->isNotAvailable())
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700">Tidak Tersedia</td>
                         @else
@@ -51,6 +60,71 @@
                     </td>
                 </tr>
                 @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Trashed Books --}}
+    <div class="mx-10">
+        <h1>Buku yang dihapus</h1>
+    </div>
+    <div class="overflow-auto mx-10 my-5 rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead class="ltr:text-left rtl:text-right">
+                <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Judul</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Genre</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pengarang</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Penerbit</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Stok</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
+                </tr>
+            </thead>
+    
+            <tbody class="divide-y divide-gray-200">
+                @if ($trashes->isEmpty())
+                <tr class="bg-gray-50">
+                    <td>Tidak ada sampah</td>
+                </tr>
+                @else
+                @foreach ($trashes as $trash)
+
+                <tr class="odd:bg-gray-50">
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->judul }}</td>
+                    @if ($trash->kategoris->isEmpty())
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">-</td>
+                    @else
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-700">
+                        @foreach ($trash->kategoris as $kategori)
+                        {{ $kategori->nama }}
+                        @endforeach
+                    </td>
+                    @endif
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $trash->pengarang()->withTrashed()->pluck('nama')->first() }}</td>
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $trash->penerbit()->withTrashed()->pluck('nama')->first() }}</td>
+                    @if ($trash->isNotAvailable())
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">Tidak Tersedia</td>
+                        @else
+                        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $trash->stok }}</td>
+                    @endif     
+                    <td class="whitespace-nowrap px-4 py-2">
+                        <a
+                        href="{{ route('master-buku-restore' , $trash->id) }}"
+                        class="inline-block rounded bg-yellow-400 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-500"
+                        >
+                        Pulihkan
+                        </a>
+                        <a
+                        href="{{ route('master-buku-force-delete' , $trash->id) }}" onclick="return confirm('Anda yakin ingin menghapus data ini secara permanen?')"
+                        class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-600"
+                        >
+                        Hapus Permanen
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>

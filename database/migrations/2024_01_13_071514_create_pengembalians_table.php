@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamp('tanggal_kembali');
             $table->foreignId('peminjaman_id')->constrained('peminjamans')->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

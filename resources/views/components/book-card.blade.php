@@ -1,6 +1,6 @@
 <a href="{{ route('detail-buku', $id) }}" class="group block m-0 p-0">
     <img
-      src="{{ asset('/storage/' . $cover) }}"
+      src="{{ asset('/storage/' . $cover)  }}"
       alt=""
       class="h-60 w-52 hover:opacity-80 object-fit"
     />

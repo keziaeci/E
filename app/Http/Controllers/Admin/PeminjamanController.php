@@ -14,8 +14,12 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
+        // dd(Peminjaman::withoutTrashed()->latest()->get());
         return view('pages.admin.peminjaman.index', [
-            'peminjamans' => Peminjaman::latest()->get()
+            'peminjamans' => Peminjaman::whereHas('buku', function ($query) {
+                $query->whereNull('deleted_at');
+            })
+            ->latest()->get()
         ]);
     }
 

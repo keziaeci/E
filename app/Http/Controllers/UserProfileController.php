@@ -11,10 +11,15 @@ class UserProfileController extends Controller
 {
     function index()  {
 
-        $buku = Peminjaman::where('user_id', Auth::user()->id)->status(request('status'))->get();
+        $buku = Peminjaman::whereHas('buku', function ($query) {
+            $query->whereNull('deleted_at');
+        })->where('user_id', Auth::user()->id)->status(request('status'))->get();
 
-        if (request('status') == 'Semua') {
-            $buku = Auth::user()->peminjamans;
+        if (request('status') == 'Semua') { 
+            $buku = Auth::user()->peminjamans()
+            ->whereHas('buku', function ($query) {
+                $query->whereNull('deleted_at');
+            })->get();
         }
         
         return view('pages.profile.index', [

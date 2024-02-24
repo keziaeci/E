@@ -15,7 +15,8 @@ class PenerbitController extends Controller
     public function index()
     {
         return view('pages.admin.penerbit.index',[
-            'penerbits' => Penerbit::latest()->get()
+            'penerbits' => Penerbit::latest()->get(),
+            'trashes' => Penerbit::onlyTrashed()->get()
         ]);
     }
 
@@ -76,5 +77,19 @@ class PenerbitController extends Controller
     {
         $penerbit->delete();
         return redirect()->route('master-penerbit')->with('success', 'Data berhasil dihapus');
+    }
+    /**
+     * Restore the specified soft-deleted data
+     */
+    function restore(Penerbit $penerbit)  {
+        $penerbit->restore();
+        return redirect()->back()->with('success', 'Data berhasil dikembalikan!');
+    }
+    /**
+     * Delete permanently specified soft-deleted data
+     */
+    function forceDelete(Penerbit $penerbit)  {
+        $penerbit->forceDelete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }
 }

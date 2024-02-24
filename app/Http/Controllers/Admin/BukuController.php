@@ -21,7 +21,8 @@ class BukuController extends Controller
     public function index()
     {
         return view('pages.admin.buku.index', [
-            'bukus' => Buku::latest()->get()
+            'bukus' => Buku::latest()->get(),
+            'trashes' => Buku::withTrashed()->onlyTrashed()->get()
         ]);
     }
 
@@ -42,7 +43,6 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
-        // dd($request->file('cover'));
         $request->validated();
 
         $buku =  Buku::create([
@@ -51,10 +51,9 @@ class BukuController extends Controller
             'penerbit_id' => $request->penerbit,
             'pengarang_id' => $request->pengarang,
             'stok' => $request->stok,
-            // 'cover' => $cover,
             'deskripsi' => $request->deskripsi,
         ]);
-        // Image::create();
+
         foreach ($request->file('cover') as $filecover) {
             $cover = $filecover->storePublicly('files/cover','public');
             $buku->images()->create([
@@ -107,7 +106,7 @@ class BukuController extends Controller
             'stok' => $request->stok,
             'deskripsi' => $request->deskripsi,
         ]);
-        // dd(empty($request->file('cover')));
+
         if (!empty($request->file('cover'))) {
             foreach ($request->file('cover') as $filecover) {
                 $cover = $filecover->storePublicly('files/cover','public');
@@ -128,19 +127,28 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {   
-        // // dd($buku->images);
         foreach ($buku->images as $cover) {
             Storage::disk('public')->delete($cover->filename);
             $cover->delete();
         } 
-        // $buku->images()->delete();
+
         $buku->delete();
-        return redirect()->route('master-buku')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('master-buku')->with('success', 'Data berhasil dihapus!');
     }
 
     function coverDelete(Buku $buku , Image $image)  {
         Storage::disk('public')->delete($image->filename);
         $image->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Cover berhasil dihapus');
+    }
+
+    function restore(Buku $buku)  {
+        $buku->restore();
+        return redirect()->back()->with('success', 'Data berhasil dikembalikan!');
+    }
+
+    function forceDelete(Buku $buku)  {
+        $buku->forceDelete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }
 }

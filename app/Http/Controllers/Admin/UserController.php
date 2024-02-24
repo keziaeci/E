@@ -12,6 +12,7 @@ class UserController extends Controller
     function index()  {
         return view('pages.admin.user.index',[
             'users' => User::where('role','Pengguna')->latest()->get(),
+            'trashes' => User::where('role','Pengguna')->onlyTrashed()->get()
         ]);
     }
 
@@ -51,5 +52,15 @@ class UserController extends Controller
     function destroy(User $user)  {
         $user->delete();
         return redirect()->route('master-user')->with('success', 'Data berhasil dihapus');
+    }
+
+    function restore(User $user)  {
+        $user->restore();
+        return redirect()->back()->with('success', 'Data berhasil dikembalikan!');
+    }
+
+    function forceDelete(User $user)  {
+        $user->forceDelete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }
 }
