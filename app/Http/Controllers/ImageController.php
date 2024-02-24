@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengembalian;
-use App\Http\Requests\StorePengembalianRequest;
-use App\Http\Requests\UpdatePengembalianRequest;
+use App\Models\Image;
+use App\Http\Requests\StoreImageRequest;
+use App\Http\Requests\UpdateImageRequest;
 
-class PengembalianController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PengembalianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePengembalianRequest $request)
+    public function store(StoreImageRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class PengembalianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pengembalian $pengembalian)
+    public function show(Image $image)
     {
         //
     }
@@ -43,7 +43,7 @@ class PengembalianController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pengembalian $pengembalian)
+    public function edit(Image $image)
     {
         //
     }
@@ -51,7 +51,7 @@ class PengembalianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePengembalianRequest $request, Pengembalian $pengembalian)
+    public function update(UpdateImageRequest $request, Image $image)
     {
         //
     }
@@ -59,7 +59,7 @@ class PengembalianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pengembalian $pengembalian)
+    public function destroy(Image $image)
     {
         //
     }

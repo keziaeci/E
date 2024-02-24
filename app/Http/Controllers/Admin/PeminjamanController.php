@@ -40,7 +40,7 @@ class PeminjamanController extends Controller
      */
     public function show(Peminjaman $peminjaman)
     {
-        //
+        return view('pages.admin.peminjaman.detail',compact('peminjaman'));
     }
 
     /**

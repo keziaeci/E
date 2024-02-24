@@ -27,22 +27,18 @@
                         />
             
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-                            <svg
-                            xmlns="http://www.w3.org/2000/svg"
+                            <svg 
                             class="h-4 w-4 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                            />
+                            viewBox="0 0 15 15" fill="currentColor" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path 
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7.5 0.875C5.49797 0.875 3.875 2.49797 3.875 4.5C3.875 6.15288 4.98124 7.54738 6.49373 7.98351C5.2997 8.12901 4.27557 8.55134 3.50407 9.31167C2.52216 10.2794 2.02502 11.72 2.02502 13.5999C2.02502 13.8623 2.23769 14.0749 2.50002 14.0749C2.76236 14.0749 2.97502 13.8623 2.97502 13.5999C2.97502 11.8799 3.42786 10.7206 4.17091 9.9883C4.91536 9.25463 6.02674 8.87499 7.49995 8.87499C8.97317 8.87499 10.0846 9.25463 10.8291 9.98831C11.5721 10.7206 12.025 11.8799 12.025 13.5999C12.025 13.8623 12.2376 14.0749 12.5 14.0749C12.7623 14.075 12.975 13.8623 12.975 13.6C12.975 11.72 12.4778 10.2794 11.4959 9.31166C10.7244 8.55135 9.70025 8.12903 8.50625 7.98352C10.0187 7.5474 11.125 6.15289 11.125 4.5C11.125 2.49797 9.50203 0.875 7.5 0.875ZM4.825 4.5C4.825 3.02264 6.02264 1.825 7.5 1.825C8.97736 1.825 10.175 3.02264 10.175 4.5C10.175 5.97736 8.97736 7.175 7.5 7.175C6.02264 7.175 4.825 5.97736 4.825 4.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                    </div>
+                    </div> 
                 </div>
                 
                 <div>
@@ -80,7 +76,11 @@
                         </span>
                     </div>
                 </div>
-                
+                @error('error')
+                <div class="px-5">
+                    <p class="text-xs text-red-700">{{ $message }}</p>
+                </div>
+                @enderror
                 <div class="flex items-center justify-between">
                     <div class="px-5">
                         <label for="remember" class="flex gap-2 items-center">
@@ -143,7 +143,56 @@
                     </span>
                     </button>
                 </div>
+                <div class="flex items-center justify-center gap-2">
+                    <p class="text-sm text-gray-500">Dont have an account?</p>
+                    
+                    <a href="{{ route('register') }}" class="text-sm underline">
+                        Sign Up here
+                    </a>
+        
+                </div>
             </form>
         </div>
     </div>  
+    @if (session()->has('success'))
+    <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20 top-2 left-2 rounded-xl border border-gray-100 bg-white p-4">
+        <div class="flex items-start gap-4">
+            <span class="text-green-600">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+                >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+                </svg>
+            </span>
+                
+            <div class="flex-1">
+                <strong class="block font-medium text-gray-900"> Berhasil </strong>
+                <p class="mt-1 text-sm text-gray-700">{{ session('success') }}</p>
+            </div>
+                
+            <button @click="open = false " class="text-gray-500 transition hover:text-gray-600">
+                <span class="sr-only">Dismiss popup</span>
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                    >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    @endif
 </x-app-layout>

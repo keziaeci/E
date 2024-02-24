@@ -27,7 +27,8 @@ class StoreBukuRequest extends FormRequest
             'pengarang' => 'required',
             'penerbit' => 'required',
             'stok' => 'nullable',
-            'cover' => 'nullable',
+            'cover.*' => 'required',
+            'cover' => 'required|array|min:1',
             'deskripsi' => 'required',
             'kategori' => 'required',
         ];

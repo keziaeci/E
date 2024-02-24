@@ -22,7 +22,7 @@ class BukuFactory extends Factory
             'penerbit_id' => mt_rand(1,3),
             'pengarang_id' => mt_rand(1,3),
             'stok' => mt_rand(1,10),
-            'cover' => fake()->imageUrl(),
+            // 'cover' => fake()->imageUrl(),
             'deskripsi' => fake()->paragraph(50)
         ];
     }

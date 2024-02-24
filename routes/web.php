@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\PeminjamanController;
 use App\Http\Controllers\Admin\PenerbitController;
 use App\Http\Controllers\Admin\PengarangController;
+use App\Http\Controllers\Admin\PengembalianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,17 +30,23 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest','nocache'])->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'index')->name('login');
+        Route::get('/register', 'create')->name('register');
+        Route::post('/register/store', 'store')->name('register-store');
         Route::post('/login/auth', 'authenticate')->name('auth');
     });
 
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+    Route::middleware(['nocache'])->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+
+    Route::get('/backup', [Controller::class, 'backup'])->name('backup');
+
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('bukus');
         Route::get('/buku/{buku}/detail', 'show')->name('detail-buku');
@@ -48,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(LemariController::class)->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
-        Route::patch('/buku/{buku}/{peminjaman}/kembali ' , 'update')->name('kembalikan-buku');
+        Route::patch('/buku/{buku}/{peminjaman}/kembali' , 'update')->name('kembalikan-buku');
     });
     
     Route::controller(UserProfileController::class)->group(function () {
@@ -69,6 +77,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/master/buku/store', 'store')->name('master-buku-store');
             Route::patch('/master/buku/{buku}/update', 'update')->name('master-buku-update');
             Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
+            Route::delete('/master/buku/{buku}/{image}/delete', 'coverDelete')->name('master-buku-cover-delete');
         });  
         
         Route::controller(PengarangController::class)->group(function () {
@@ -115,6 +124,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/master/peminjaman/store', 'store')->name('master-peminjaman-store');
             Route::patch('/master/peminjaman/{peminjaman}/update', 'update')->name('master-peminjaman-update');
             Route::delete('/master/peminjaman/{peminjaman}/delete', 'destroy')->name('master-peminjaman-delete');
+        });
+        
+        Route::controller(PengembalianController::class)->group(function () {
+            Route::get('/master/pengembalian', 'index')->name('master-pengembalian');
+            Route::get('/master/pengembalian/create', 'create')->name('master-pengembalian-create');
+            Route::get('/master/pengembalian/{pengembalian}/detail', 'show')->name('master-pengembalian-detail');
+            Route::get('/master/pengembalian/{pengembalian}/edit', 'edit')->name('master-pengembalian-edit');
+            Route::post('/master/pengembalian/store', 'store')->name('master-pengembalian-store');
+            Route::patch('/master/pengembalian/{pengembalian}/update', 'update')->name('master-pengembalian-update');
+            Route::delete('/master/pengembalian/{pengembalian}/delete', 'destroy')->name('master-pengembalian-delete');
         });
 
     });

@@ -1,7 +1,7 @@
 <x-admin-layout>
     <div class="rounded-lg bg-white m-5 p-8 shadow-lg lg:col-span-3 lg:p-12">
         <h1 class="text-xl font-bold">Ubah Buku</h1>
-        <form action="{{ route('master-buku-update',  $buku->id) }}" method="POST" class="space-y-4">
+        <form action="{{ route('master-buku-update',  $buku->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             @method('patch')
             
@@ -42,11 +42,11 @@
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Pengarang </label>
+                    <label for="pengarang" class="block text-xs font-medium text-gray-700"> Pengarang </label>
                     
                     <select
                     name="pengarang"
-                    id="HeadlineAct"
+                    id="pengarang"
                     class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Pengarang</option>
@@ -63,16 +63,17 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="HeadlineAct" class="sr-only"> Penerbit </label>
-                    <select name="penerbit" id="HeadlineAct"
+                    <label for="penerbit" class="block text-xs font-medium text-gray-700"> Penerbit </label>
+                    <select name="penerbit" id="penerbit"
                         class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
                     <option @selected(true) disabled="disabled">Penerbit</option>
                     @foreach ($penerbits as $penerbit)
                         @if ($buku->penerbit_id == $penerbit->id)
                         <option value="{{ $penerbit->id }}" selected>{{ $penerbit->nama }}</option>
+                            @else
+                            <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                         @endif
-                        <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
                     @endforeach
                     </select>
                     @error('penerbit')
@@ -85,28 +86,55 @@
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    <label class="sr-only" for="email">Stok</label>
-                    <input
-                        class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                        placeholder="Stok"
-                        value="{{ old('stok',$buku->stok) }}"
-                        type="number" min="1" max="3000" step="1"
-                        id="stok"
-                        name="stok"
-                    />
-                    @error('stok')
-                    <p class="text-xs text-red-700">{{ $message }}</p>
-                    @enderror
+                    <div x-data="{ productQuantity: {{ old('stok',$buku->stok) }} }">
+                        <label for="Quantity" class="block text-xs font-medium text-gray-700"> Stok </label>
+                        <div class="flex justify-between items-center rounded border border-gray-200">
+                            <button
+                            type="button"
+                            x-on:click="productQuantity--"
+                            :disabled="productQuantity === 0"
+                            class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            >
+                            &minus;
+                            </button>
+                            <input
+                            type="number"
+                            id="Quantity"
+                            name="stok"
+                            x-model="productQuantity"
+                            class="h-10 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                            />
+
+                            <button
+                            type="button"
+                            x-on:click="productQuantity++"
+                            class="size-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            >
+                            &plus;
+                            </button>
+                        </div>
+                        @error('stok')
+                        <p class="text-xs text-red-700">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
                 <div>
-                    <label class="sr-only" for="judul">Cover</label>
-                    <input
+                    {{-- <input
                     class="w-full rounded-lg border-gray-200 p-3 text-sm"
                     placeholder="Cover"
                     value="{{ old('cover',$buku->cover) }}"
                     type="text"
                     id="cover"
                     name="cover"
+                    /> --}}
+                    <label for="cover" class="block text-xs font-medium text-gray-700"> Cover </label>
+                    <input
+                    class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                    placeholder="Cover"
+                    type="file"
+                    id="cover"
+                    name="cover[]"
+                    multiple="multiple"
                     />
                 </div>
                 @error('cover')
@@ -115,10 +143,9 @@
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
+                
                 <div class="form-control">
-                    <label class="label">
-                    </label>
+                    <label for="editor" class="block text-xs font-medium text-gray-700"> Deskripsi </label>
                     <textarea name="deskripsi" id="editor" placeholder="Sinopsis">
                         {{   old('deskripsi', $buku->deskripsi)    }}
                     </textarea>
@@ -126,6 +153,8 @@
                     <p class="text-xs text-red-700">{{ $message }}</p>
                     @enderror
                 </div>
+                
+                
             </div>
 
             <div class="mt-4">
@@ -137,8 +166,22 @@
                 </button>
             </div>
         </form>
-
     </div>
+    
+    <div class="rounded-lg bg-white m-5 p-8 shadow-lg flex lg:col-span-3 lg:p-12">
+        <h1 class="text-xl font-bold">Cover</h1>
+        @foreach ($buku->images as $image)
+        <div class="inline">
+            <img src="{{ '/storage/' . $image->filename }}" class="h-52 w-40 lg:h-72 lg:w-52" alt="">
+            <form action="{{ route('master-buku-cover-delete', [$buku->id, $image->id]) }}" class="block" method="POST">
+                @method('DELETE')
+                @csrf
+                <button  class="underline text-red-500">Delete</button>
+            </form>
+        </div>
+        @endforeach
+    </div>
+
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ), {

@@ -14,13 +14,12 @@ class LemariController extends Controller
     function store(Buku $buku) {
 
         Peminjaman::create([
-            'tanggal_pinjam' => Carbon::now(),
-            'tenggat_waktu' => Carbon::now()->addWeek(),
+            'tanggal_pinjam' => Carbon::now('Asia/Jakarta'),
+            'tenggat_waktu' => Carbon::now('Asia/Jakarta')->addWeek(),
             'status' => $buku->checkStok(),
             'buku_id' => $buku->id,
             'user_id' => Auth::user()->id
         ]);
-        // Mengurangi stok buku 
         $buku->update([
             'stok' => $buku->stockOut()
         ]);
@@ -31,8 +30,13 @@ class LemariController extends Controller
     function update(Buku $buku , Peminjaman $peminjaman) {
 
         $pengembalian = Pengembalian::create([
-            'tanggal_kembali' => Carbon::now(),
+            'tanggal_kembali' => Carbon::now('Asia/Jakarta'),
             'peminjaman_id' => $peminjaman->id,
+        ]);
+
+        // Menambah stok buku 
+        $buku->update([
+            'stok' => $buku->stockIn()
         ]);
 
         if($pengembalian->tanggal_kembali->greaterThan($peminjaman->tenggat_waktu)) {
