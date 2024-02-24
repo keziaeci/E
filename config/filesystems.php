@@ -38,6 +38,7 @@ return [
 
         'backup' => [
             'driver' => 'local',
+            // 'root' => 'C:\Users\ASUS\Downloads',
             'root' => storage_path('app/public/files'),
             'throw' => false,
         ],

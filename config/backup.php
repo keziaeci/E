@@ -215,7 +215,7 @@ return [
             ],
         ],
 
-        'slack' => [
+        'slack' => [ 
             'webhook_url' => '',
 
             /*
