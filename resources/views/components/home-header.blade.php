@@ -73,7 +73,7 @@
                   name="search"
                   id="Search"
                   placeholder="Search for..."
-                  class="w-full lg:hidden inline rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+                  class="w-full lg:hidden md:hidden inline rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
                 />
               </form>
             <button x-on:click="isOpen = !isOpen"

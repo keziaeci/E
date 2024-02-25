@@ -4,9 +4,9 @@
 
   {{-- //TODO add toast setiap adanya operasi dengan data --}}
   {{-- //FIXME all icon and field on small breakpoints  --}}
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-0 lg:mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center sm:justify-between sm:gap-4">
-        <div class="flex invisible md:visible lg:visible">
+        <div class="hidden sm:block">
           <a
             class="inline-block rounded border border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
             href="{{ route('bukus') }}"
@@ -51,8 +51,8 @@
 
         {{-- ketika layar kecil --}}
         <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
-          <div class="flex gap-4 ">
-            <div class="flex lg:hidden md:hidden m-0 p-0 ">
+          <div class="flex gap-4">
+            <div class="flex lg:hidden md:hidden ">
               <a
                 class="inline-block rounded border  border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
                 href="{{ route('bukus') }}"
