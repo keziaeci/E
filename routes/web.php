@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(LemariController::class)->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
+        Route::post('/buku/{buku}/{peminjaman}/baca' , 'bacaLagi')->name('pinjam-buku-lagi');
         Route::patch('/buku/{buku}/{peminjaman}/kembali' , 'update')->name('kembalikan-buku');
     });
     
@@ -132,7 +133,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/peminjaman/{peminjaman}/detail', 'show')->name('master-peminjaman-detail');
             Route::get('/master/peminjaman/{peminjaman}/edit', 'edit')->name('master-peminjaman-edit');
             Route::post('/master/peminjaman/store', 'store')->name('master-peminjaman-store');
-            Route::patch('/master/peminjaman/{peminjaman}/update', 'update')->name('master-peminjaman-update');
+            Route::patch('/master/peminjaman/{peminjaman}/{buku}/update', 'update')->name('master-peminjaman-update');
             Route::delete('/master/peminjaman/{peminjaman}/delete', 'destroy')->name('master-peminjaman-delete');
         });
         

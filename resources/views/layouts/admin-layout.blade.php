@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
-    <title>Alpine.js Sidebar</title>
+    <title>Kawan Alinea</title>
     @vite('resources/css/app.css')
     @vite(['resources/js/app.js'])
 

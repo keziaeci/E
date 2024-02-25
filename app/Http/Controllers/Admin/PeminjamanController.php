@@ -6,6 +6,7 @@ use App\Models\Peminjaman;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePeminjamanRequest;
 use App\Http\Requests\UpdatePeminjamanRequest;
+use App\Models\Buku;
 
 class PeminjamanController extends Controller
 {
@@ -19,7 +20,11 @@ class PeminjamanController extends Controller
             'peminjamans' => Peminjaman::whereHas('buku', function ($query) {
                 $query->whereNull('deleted_at');
             })
-            ->latest()->get()
+            ->whereNot(function ($query) {
+                $query->where('status', 'Menunggu');
+            })
+            ->latest()->get(),
+            'permohonans' => Peminjaman::withTrashed()->where('status', 'Menunggu')->latest()->get()
         ]);
     }
 
@@ -58,9 +63,26 @@ class PeminjamanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePeminjamanRequest $request, Peminjaman $peminjaman)
-    {
-        //
+    public function update(UpdatePeminjamanRequest $request, Peminjaman $peminjaman , $buku )
+    {   
+        if ($peminjaman->buku->isNotAvailable()) {
+            return redirect()->back()->with('error', 'Buku ini sedang tidak tersedia!');
+        } else {
+            $peminjaman->update([
+                'status' => Peminjaman::STATUS['Borrow']
+            ]);
+            // $buku->update([
+            //     'stok' => $buku->stockOut()
+            // ]);
+            $buku = Buku::where('id', $buku)->first();
+            $buku->update([
+                'stok' => $buku->stockOut() 
+            ]);
+        }
+        
+            return redirect()->back()->with('success', 'Berhasil memberi ijin!');
+        
+        
     }
 
     /**
