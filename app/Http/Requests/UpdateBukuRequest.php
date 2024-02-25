@@ -30,10 +30,9 @@ class UpdateBukuRequest extends FormRequest
             'cover.*' => 'nullable',
             'cover' => 'nullable|array|min:1',
             'deskripsi' => 'required',
+            'kategoris_id' =>  'required|array|min:1',
+            'kategoris_id.*' => 'required|exists:kategoris,id',
         ];
-        // if ($this->input('judul') != $this->buku->judul) {
-        //     $rules['judul'] = "required|unique:bukus";
-        // }
 
         return $rules;
     }

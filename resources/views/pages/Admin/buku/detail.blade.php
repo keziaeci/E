@@ -80,20 +80,24 @@
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Genre</dt>
                     <dd class="text-gray-700 sm:col-span-2">
+                        @if ($buku->kategoris->isEmpty())
+                            -
+                        @else
                         @foreach ($buku->kategoris as $kategori)
-                        {{ $kategori->nama }}
-                        @endforeach
+                            {{ $kategori->nama }}
+                            @endforeach
+                        @endif
                     </dd>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Pengarang</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ $buku->pengarang->nama }}</dd>
+                    <dd class="text-gray-700 sm:col-span-2">{{ $buku->pengarang()->withTrashed()->pluck('nama')->first() }}</dd>
                 </div>
             
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
                     <dt class="font-medium text-gray-900">Penerbit</dt>
-                    <dd class="text-gray-700 sm:col-span-2">{{ $buku->penerbit->nama }}</dd>
+                    <dd class="text-gray-700 sm:col-span-2">{{ $buku->penerbit()->withTrashed()->pluck('nama')->first() }}</dd>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">

@@ -15,7 +15,8 @@ class KategoriController extends Controller
     public function index()
     {
         return view('pages.admin.kategori.index',[
-            'kategoris' => Kategori::latest()->get()
+            'kategoris' => Kategori::latest()->get(),
+            'trashes' => Kategori::onlyTrashed()->get()
         ]);
     }
 
@@ -76,5 +77,20 @@ class KategoriController extends Controller
     {
         $kategori->delete();
         return redirect()->route('master-kategori')->with('success', 'Data berhasil dihapus');
+    }
+
+    /**
+     * Restore the specified soft-deleted data
+     */
+    function restore(Kategori $kategori)  {
+        $kategori->restore();
+        return redirect()->back()->with('success', 'Data berhasil dikembalikan!');
+    }
+    /**
+     * Delete permanently specified soft-deleted data
+     */
+    function forceDelete(Kategori $kategori)  {
+        $kategori->forceDelete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }
 }

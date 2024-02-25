@@ -74,6 +74,48 @@
         </table>
     </div>
 
+    {{-- Trashed data --}}
+    <div class="mx-10">
+        <h1 class="font-semibold">Penerbit yang dihapus</h1>
+    </div>
+    <div class="overflow-auto mx-10 my-5 rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead class="ltr:text-left rtl:text-right">
+                <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nama</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @if ($trashes->isEmpty())
+                    <tr class="flex justify-center">
+                        <td>Tidak ada data</td>
+                    </tr>
+                @else
+                @foreach ($trashes as $trash)
+                <tr class="odd:bg-gray-50">
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->nama }}</td>
+                    <td class="whitespace-nowrap px-4 py-2">
+                        <a
+                        href="{{ route('master-penerbit-restore' , $trash->id) }}"
+                        class="inline-block rounded bg-yellow-400 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-500"
+                        >
+                        Pulihkan
+                        </a>
+                        <a
+                        href="{{ route('master-penerbit-force-delete' , $trash->id) }}" onclick="return confirm('Anda yakin ingin menghapus data ini secara permanen?')"
+                        class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-600"
+                        >
+                        Hapus Permanen
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
+
     {{-- //FIXME success alert position after inserting data --}}
     @if (session()->has('success'))
     <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20  top-10 rounded-xl border border-gray-100 bg-white p-4">

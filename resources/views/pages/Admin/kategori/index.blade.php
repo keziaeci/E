@@ -1,6 +1,5 @@
 <x-admin-layout>
 
-  
     {{-- //FIXME datatables table  --}}
     <div class="mx-10 my-5 flex justify-end">
         <a 
@@ -70,6 +69,48 @@
                     </td>
                 </tr>
                 @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    {{-- Trashed data --}}
+    <div class="mx-10">
+        <h1 class="font-semibold">Kategori yang dihapus</h1>
+    </div>
+    <div class="overflow-auto mx-10 my-5 rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+            <thead class="ltr:text-left rtl:text-right">
+                <tr>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nama</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @if ($trashes->isEmpty())
+                    <tr class="flex justify-center">
+                        <td>Tidak ada data</td>
+                    </tr>
+                @else
+                @foreach ($trashes as $trash)
+                <tr class="odd:bg-gray-50">
+                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $trash->nama }}</td>
+                    <td class="whitespace-nowrap px-4 py-2">
+                        <a
+                        href="{{ route('master-kategori-restore' , $trash->id) }}"
+                        class="inline-block rounded bg-yellow-400 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-500"
+                        >
+                        Pulihkan
+                        </a>
+                        <a
+                        href="{{ route('master-kategori-force-delete' , $trash->id) }}" onclick="return confirm('Anda yakin ingin menghapus data ini secara permanen?')"
+                        class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-600"
+                        >
+                        Hapus Permanen
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>

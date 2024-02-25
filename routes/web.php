@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(LemariController::class)->group(function () {
         Route::post('/buku/{buku}/pinjam' , 'store')->name('pinjam-buku');
+        Route::post('/buku/{buku}/{peminjaman}/baca' , 'bacaLagi')->name('pinjam-buku-lagi');
         Route::patch('/buku/{buku}/{peminjaman}/kembali' , 'update')->name('kembalikan-buku');
     });
     
@@ -74,6 +75,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/buku/create', 'create')->name('master-buku-create');
             Route::get('/master/buku/{buku}/edit', 'edit')->name('master-buku-edit');
             Route::get('/master/buku/{buku}/detail', 'show')->name('master-buku-detail');
+            Route::get('/master/buku/{buku}/restore', 'restore')->withTrashed()->name('master-buku-restore');
+            Route::get('/master/buku/{buku}/delete', 'forceDelete')->withTrashed()->name('master-buku-force-delete');
             Route::post('/master/buku/store', 'store')->name('master-buku-store');
             Route::patch('/master/buku/{buku}/update', 'update')->name('master-buku-update');
             Route::delete('/master/buku/{buku}/delete', 'destroy')->name('master-buku-delete');
@@ -84,6 +87,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/pengarang', 'index')->name('master-pengarang');
             Route::get('/master/pengarang/create', 'create')->name('master-pengarang-create');
             Route::get('/master/pengarang/{pengarang}/edit', 'edit')->name('master-pengarang-edit');
+            Route::get('/master/pengarang/{pengarang}/restore', 'restore')->withTrashed()->name('master-pengarang-restore');
+            Route::get('/master/pengarang/{pengarang}/delete', 'forceDelete')->withTrashed()->name('master-pengarang-force-delete');
             Route::post('/master/pengarang/store', 'store')->name('master-pengarang-store');
             Route::patch('/master/pengarang/{pengarang}/update', 'update')->name('master-pengarang-update');
             Route::delete('/master/pengarang/{pengarang}/delete', 'destroy')->name('master-pengarang-delete');
@@ -93,6 +98,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/user', 'index')->name('master-user');
             Route::get('/master/user/create', 'create')->name('master-user-create');
             Route::get('/master/user/{user}/edit', 'edit')->name('master-user-edit');
+            Route::get('/master/user/{user}/restore', 'restore')->withTrashed()->name('master-user-restore');
+            Route::get('/master/user/{user}/delete', 'forceDelete')->withTrashed()->name('master-user-force-delete');
             Route::post('/master/user/store', 'store')->name('master-user-store');
             Route::patch('/master/user/{user}/update', 'update')->name('master-user-update');
             Route::delete('/master/user/{user}/delete', 'destroy')->name('master-user-delete');
@@ -102,6 +109,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/penerbit', 'index')->name('master-penerbit');
             Route::get('/master/penerbit/create', 'create')->name('master-penerbit-create');
             Route::get('/master/penerbit/{penerbit}/edit', 'edit')->name('master-penerbit-edit');
+            Route::get('/master/penerbit/{penerbit}/restore', 'restore')->withTrashed()->name('master-penerbit-restore');
+            Route::get('/master/penerbit/{penerbit}/delete', 'forceDelete')->withTrashed()->name('master-penerbit-force-delete');
             Route::post('/master/penerbit/store', 'store')->name('master-penerbit-store');
             Route::patch('/master/penerbit/{penerbit}/update', 'update')->name('master-penerbit-update');
             Route::delete('/master/penerbit/{penerbit}/delete', 'destroy')->name('master-penerbit-delete');
@@ -111,6 +120,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/kategori', 'index')->name('master-kategori');
             Route::get('/master/kategori/create', 'create')->name('master-kategori-create');
             Route::get('/master/kategori/{kategori}/edit', 'edit')->name('master-kategori-edit');
+            Route::get('/master/kategori/{kategori}/restore', 'restore')->withTrashed()->name('master-kategori-restore');
+            Route::get('/master/kategori/{kategori}/delete', 'forceDelete')->withTrashed()->name('master-kategori-force-delete');
             Route::post('/master/kategori/store', 'store')->name('master-kategori-store');
             Route::patch('/master/kategori/{kategori}/update', 'update')->name('master-kategori-update');
             Route::delete('/master/kategori/{kategori}/delete', 'destroy')->name('master-kategori-delete');
@@ -122,7 +133,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/master/peminjaman/{peminjaman}/detail', 'show')->name('master-peminjaman-detail');
             Route::get('/master/peminjaman/{peminjaman}/edit', 'edit')->name('master-peminjaman-edit');
             Route::post('/master/peminjaman/store', 'store')->name('master-peminjaman-store');
-            Route::patch('/master/peminjaman/{peminjaman}/update', 'update')->name('master-peminjaman-update');
+            Route::patch('/master/peminjaman/{peminjaman}/{buku}/update', 'update')->name('master-peminjaman-update');
             Route::delete('/master/peminjaman/{peminjaman}/delete', 'destroy')->name('master-peminjaman-delete');
         });
         

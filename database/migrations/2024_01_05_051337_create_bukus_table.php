@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('stok')->nullable();
             $table->text('deskripsi');
             $table->timestamps();
+            $table->softDeletes();
+            // $table->dropSoftDeletes();
         });
     }
 

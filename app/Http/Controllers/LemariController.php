@@ -52,4 +52,13 @@ class LemariController extends Controller
         return redirect()->back();
 
     }
+
+    function bacaLagi(Buku $buku, Peminjaman $peminjaman) {
+        // dd($peminjaman);
+        $peminjaman->update([
+            'status' => Peminjaman::STATUS['Pending']
+        ]);
+
+        return redirect()->back();
+    }
 }

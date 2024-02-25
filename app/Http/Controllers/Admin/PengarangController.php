@@ -15,7 +15,8 @@ class PengarangController extends Controller
     public function index()
     {
         return view('pages.admin.pengarang.index',[
-            'pengarangs' => Pengarang::latest()->get()
+            'pengarangs' => Pengarang::latest()->get(),
+            'trashes' => Pengarang::onlyTrashed()->get()
         ]);
     }
     
@@ -76,5 +77,15 @@ class PengarangController extends Controller
     {
         $pengarang->delete();
         return redirect()->route('master-pengarang')->with('success', 'Data berhasil dihapus');
+    }
+
+    function restore(Pengarang $pengarang)  {
+        $pengarang->restore();
+        return redirect()->back()->with('success', 'Data berhasil dikembalikan!');
+    }
+
+    function forceDelete(Pengarang $pengarang)  {
+        $pengarang->forceDelete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }
 }

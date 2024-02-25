@@ -1,9 +1,19 @@
+{{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script> --}}
+
 <header class="border-b">
 
   {{-- //TODO add toast setiap adanya operasi dengan data --}}
   {{-- //FIXME all icon and field on small breakpoints  --}}
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center sm:justify-between sm:gap-4">
+        <div class="flex invisible md:visible lg:visible">
+          <a
+            class="inline-block rounded border border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
+            href="{{ route('bukus') }}"
+          >
+            <svg class="h-5 w-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.07926 0.222253C7.31275 -0.007434 7.6873 -0.007434 7.92079 0.222253L14.6708 6.86227C14.907 7.09465 14.9101 7.47453 14.6778 7.71076C14.4454 7.947 14.0655 7.95012 13.8293 7.71773L13 6.90201V12.5C13 12.7761 12.7762 13 12.5 13H2.50002C2.22388 13 2.00002 12.7761 2.00002 12.5V6.90201L1.17079 7.71773C0.934558 7.95012 0.554672 7.947 0.32229 7.71076C0.0899079 7.47453 0.0930283 7.09465 0.32926 6.86227L7.07926 0.222253ZM7.50002 1.49163L12 5.91831V12H10V8.49999C10 8.22385 9.77617 7.99999 9.50002 7.99999H6.50002C6.22388 7.99999 6.00002 8.22385 6.00002 8.49999V12H3.00002V5.91831L7.50002 1.49163ZM7.00002 12H9.00002V8.99999H7.00002V12Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </a>
+        </div>
         <div class="relative hidden sm:block">
           <label class="sr-only" for="search"> Search </label>
           
@@ -41,105 +51,50 @@
 
         {{-- ketika layar kecil --}}
         <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
-          <div class="flex gap-4">
-            <button
-              type="button" id="Search"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700 sm:hidden"
-            >
-              <span class="sr-only">Search</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
+          <div class="flex gap-4 ">
+            <div class="flex lg:hidden md:hidden m-0 p-0 ">
+              <a
+                class="inline-block rounded border  border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
+                href="{{ route('bukus') }}"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-
-            <div class="relative hidden">
+                <svg class="h-5 w-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.07926 0.222253C7.31275 -0.007434 7.6873 -0.007434 7.92079 0.222253L14.6708 6.86227C14.907 7.09465 14.9101 7.47453 14.6778 7.71076C14.4454 7.947 14.0655 7.95012 13.8293 7.71773L13 6.90201V12.5C13 12.7761 12.7762 13 12.5 13H2.50002C2.22388 13 2.00002 12.7761 2.00002 12.5V6.90201L1.17079 7.71773C0.934558 7.95012 0.554672 7.947 0.32229 7.71076C0.0899079 7.47453 0.0930283 7.09465 0.32926 6.86227L7.07926 0.222253ZM7.50002 1.49163L12 5.91831V12H10V8.49999C10 8.22385 9.77617 7.99999 9.50002 7.99999H6.50002C6.22388 7.99999 6.00002 8.22385 6.00002 8.49999V12H3.00002V5.91831L7.50002 1.49163ZM7.00002 12H9.00002V8.99999H7.00002V12Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+              </a>
+            </div>
+            <div x-data="{ isOpen: false }" class="flex transition-all duration-300" :class="{'relative': isOpen , 'relative' : !isOpen}">
               <label for="Search" class="sr-only"> Search </label>
+              <form action="{{ route('cari-buku') }}" method="GET">
+                <input 
+                  :class="{'hidden' : isOpen , 'w-full px-2' : !isOpen}"
+                  type="text"
+                  name="search"
+                  id="Search"
+                  placeholder="Search for..."
+                  class="w-full md:hidden lg:hidden inline rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+                />
+              </form>
 
-              <input
-                type="text"
-                id="Search"
-                placeholder="Search for..."
-                class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
-              />
-
-              <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-                <button type="button" class="text-gray-600 hover:text-gray-700">
+              
+              <button x-on:click="isOpen = !isOpen"
+                {{-- :class="{'hidden' : isOpen}" --}}
+                class="inline shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700 sm:hidden"
+                >
                   <span class="sr-only">Search</span>
-
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
                     stroke="currentColor"
-                    class="h-4 w-4"
+                    stroke-width="2"
                   >
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     />
                   </svg>
-                </button>
-              </span>
+              </button>
             </div>
-
-            <a
-              href="#"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
-            >
-              <span class="sr-only">Academy</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                <path
-                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                />
-              </svg>
-            </a>
-
-            <a
-              href="#"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
-            >
-              <span class="sr-only">Notifications</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </a>
           </div>
 
           
@@ -252,9 +207,9 @@
     </div>
     
   </header>
-
+{{-- 
   <script>
 
     const search = document.getElementById()
 
-  </script>
+  </script> --}}

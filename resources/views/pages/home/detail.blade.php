@@ -53,8 +53,17 @@
                 <button class="inline-block  border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:text-gray-500 focus:outline-none focus:ring focus:ring-gray-200 active:text-gray-500">
                   Menunggu
                 </button>
+                @if (\Carbon\Carbon::parse($peminjaman->tenggat_waktu)->greaterThan($peminjaman->pengembalian->tanggal_kembali))
+                <div class="mt-2">
+                  <div role="alert" class="rounded border-s-4 border-orange-500 bg-orange-50 p-4">
+                    <p class="mt-2 text-sm text-orange-700">
+                      Permohonan anda sedang di proses
+                    </p>
+                  </div>  
+                @endif
                       @break
                 @case("Sedang Meminjam")
+
                 <div class="flex flex-col gap-2">
                   <button class="inline-block  border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500">
                     Mulai Baca  
@@ -66,13 +75,37 @@
                       Kembalikan
                     </button>
                   </form>
-
+                  
+                  <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
+                    <p class="mt-2 text-sm text-red-700">
+                      Batas terakhir pengembalian : {{ date('d-m-Y, h:m:s', strtotime($peminjaman->tenggat_waktu)) }}                    
+                    </p>
+                  </div>  
                 </div>
                       @break
                 @case("Sudah Dikembalikan")
-                <button class="inline-block  border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring focus:ring-gray-600 active:text-indigo-500">
-                  Telah Dikembalikan
-                </button>
+                <div class="flex flex-col gap-2">
+                  @if (\Carbon\Carbon::parse($peminjaman->tenggat_waktu)->greaterThan($peminjaman->pengembalian->tanggal_kembali))
+                    <form action="{{ route('pinjam-buku-lagi', [$buku->id, $peminjaman->id]) }}" method="POST" class="min-w-full lg:static "> 
+                      @method('Post')
+                      @csrf
+                      <button
+                        class="inline-block border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-indigo-500"
+                      >
+                        Baca Lagi
+                      </button>
+                    </form>
+                    <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
+                      <p class="mt-2 text-sm text-red-700">
+                        Peminjaman masih berlaku hingga {{ date('d-m-Y, h:m:s', strtotime($peminjaman->tenggat_waktu)) }}. <br> Dapatkan akses dengan pencet tombol diatas.                    
+      
+                      </p>
+                    </div>  
+                  @endif
+                  {{-- <button class="inline-block  border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring focus:ring-gray-600 active:text-indigo-500">
+                    Telah Dikembalikan
+                  </button> --}}
+                </div>
                       @break
                 @case("Dikembalikan Terlambat")
                 <button class="inline-block  border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-black focus:outline-none focus:ring active:text-indigo-500">
@@ -82,8 +115,7 @@
               @endswitch          
             @endif
             {{-- end button --}}
-
-
+              
           </dl>
       </div>
 
@@ -95,7 +127,7 @@
           <h2>{!! $buku->deskripsi  !!}</h2>
 
           {{-- badge kategori --}}
-          <div class="my-2">
+          <div class="my-2 flex gap-2">
             {{-- {{ dd($buku->kategoris) }} --}}
             @foreach ($buku->kategoris as $k)
             <a href="{{ route('kategori-buku', $k->id) }}" class="px-2 py-1 whitespace-nowrap rounded-full bg-gray-300">

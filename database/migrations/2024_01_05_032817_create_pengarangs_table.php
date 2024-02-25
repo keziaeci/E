@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pengarangs', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateBackup
      * Create a new event instance.
      */
 
-     public $output;
+    public $output;
     public function __construct($output)
     {
         $this->output = $output;
