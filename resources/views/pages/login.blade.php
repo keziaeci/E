@@ -2,8 +2,8 @@
 
     <div class="flex items-center min-h-screen">
         
-        <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-lg text-center">
+        <div class="lg:mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="max-w-lg text-center">
                 <h1 class="text-2xl font-bold sm:text-3xl">Kapan lagi!</h1>
             
                 <p class="mt-4 text-gray-500">

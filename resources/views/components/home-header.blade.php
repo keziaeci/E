@@ -65,7 +65,6 @@
             </form> --}}
             <div x-data="{ isOpen: false }" class="flex transition-all duration-300" :class="{'relative': isOpen , 'relative' : !isOpen}">
               <label for="Search" class="sr-only"> Search </label>
-              
               <form action="{{ route('cari-buku') }}" method="GET" class="flex">
                 <input
                   :class="{'hidden' : isOpen , 'w-14 px-2' : !isOpen}"
