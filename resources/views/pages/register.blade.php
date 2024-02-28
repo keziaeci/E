@@ -156,61 +156,9 @@
                     </div>
                     @enderror
                 </div>
-                {{-- @error('error')
-                <div class="px-5">
-                    <p class="text-xs text-red-700">{{ $message }}</p>
-                </div>
-                @enderror --}}
-                {{-- <div class="flex items-center justify-between">
-                    <div class="px-5">
-                        <label for="remember" class="flex gap-2 items-center">
-                            <input
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                            class="size-3 rounded-md border-gray-200 bg-white shadow-sm"
-                            />
-    
-                            <span class="text-sm text-gray-700">
-                                Remember Me
-                            </span>
-                        </label>
-                    </div>
-                    
-                    <a class="text-sm underline text-gray-500">
-                        Forgot Password?
-                    </a>
-        
-                </div>
-                
-                <div class="flex items-center justify-center">
-
-                    <button
-                    class="group relative inline-block w-96 text-sm font-medium text-white focus:outline-none focus:ring"
-                    href="/download" type="submit"
-                >
-                    <span class="absolute inset-0 border border-blue-600 group-active:border-blue-500"></span>
-                    <span
-                    class="block border border-blue-600 bg-blue-600 px-12 py-3 transition-transform active:border-blue-500 active:bg-blue-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
-                    >
-                    Login
-                    </span>
-                    </button>
-                </div>
-
-
-              
-                
-                <span class="relative flex justify-center">
-                    <div
-                    class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"
-                    ></div>
-                    
-                    <span class="relative z-10 bg-white px-6">or</span>
-                </span> --}}
                 
                 <div class="flex justify-center">
-                    <button
+                    {{-- <button
                     class="group relative w-96 text-sm font-medium text-white focus:outline-none focus:ring"
                     href="/download" type="submit"
                 >
@@ -220,6 +168,13 @@
                     >
                     Sign In
                     </span>
+                    </button> --}}
+
+                    <button
+                    type="submit"
+                        class="w-96 text-sm flex gap-2 justify-center  text-center font-medium focus:outline-none focus:ring focus:ring-gray-800 text-white bg-black px-12 py-3 active:border-black active:bg-gray-950"
+                        >
+                        Sign In
                     </button>
                 </div>
                 <div class="flex items-center justify-center gap-2">

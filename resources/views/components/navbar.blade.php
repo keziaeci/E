@@ -1,4 +1,5 @@
-{{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 <header class="border-b">
 
@@ -184,10 +185,7 @@
                     </button>
                   </form>
   
-                  {{-- <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit">logout</button>
-                  </form> --}}
+                  
                 </div>
               </div>
             </div>

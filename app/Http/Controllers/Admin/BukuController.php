@@ -43,7 +43,6 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
-        // dd($request);
         $request->validated();
 
         $buku =  Buku::create([

@@ -36,6 +36,8 @@ Route::middleware(['guest','nocache'])->group(function () {
         Route::get('/register', 'create')->name('register');
         Route::post('/register/store', 'store')->name('register-store');
         Route::post('/login/auth', 'authenticate')->name('auth');
+        Route::get('/google/redirect', 'redirect')->name('google-redirect');
+        Route::get('/callback/google', 'googleCallback')->name('google-callback');
     });
 
 });
