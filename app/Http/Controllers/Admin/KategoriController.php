@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Kategori;
 use App\Http\Controllers\Controller;
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
@@ -90,6 +91,8 @@ class KategoriController extends Controller
      * Delete permanently specified soft-deleted data
      */
     function forceDelete(Kategori $kategori)  {
+        activity()->disableLogging();
+        Activity::where('subject_id', $kategori->id)->delete();
         $kategori->forceDelete();
         return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }

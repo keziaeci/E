@@ -38,7 +38,7 @@
                             </svg>
                         </a>
                         
-                        <form action="{{ route('master-peminjaman-delete' , $peminjaman->id) }}" method="POST">
+                        {{-- <form action="{{ route('master-peminjaman-delete' , $peminjaman->id) }}" method="POST">
                             <button onclick="return confirm('Apakah anda yakin?');" type="submit" class="inline-block p-3 text-red-700 hover:bg-red-50 focus:relative" title="Delete Product">
                             @method('delete')
                             @csrf
@@ -57,7 +57,7 @@
                                     />
                                 </svg>
                             </button>
-                        </form>
+                        </form> --}}
                     </span>
                 </div>
 

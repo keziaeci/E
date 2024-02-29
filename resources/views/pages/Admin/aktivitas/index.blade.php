@@ -50,6 +50,8 @@
                   <h1 class="block">{{ $aktivitas->created_at->diffForHumans() }}</h1>
                 </div>
             </div>
+          </summary>
+        </details>
         </div>
             @break
         @default
@@ -81,6 +83,8 @@
                       <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
                     </div>
                 </div>
+              </summary>
+            </details>
             </div>
 
             @break
@@ -106,6 +110,8 @@
                       @endif
                     </div>
                 </div>
+                </summary>
+              </details>
             </div>
 
             @break
@@ -131,6 +137,8 @@
                       <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
                     </div>
                 </div>
+              </summary>
+            </details>
             </div>
 
             @break
@@ -198,6 +206,8 @@
                           <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
                         </div>
                     </div>
+                  </summary>
+                </details>
                 </div>
 
                 {{-- <div class="m-5 border border-black rounded-lg p-3 items-center flex">
@@ -238,12 +248,12 @@
                           @else
                           <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} Peminjaman </h1>
                           @endif
-                          {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1> --}}
                           <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
                         </div>
                     </div>
+                  </summary>
+                </details>
                 </div>
-                {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Peminjaman {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->created_at->diffForHumans() }}</div> --}}
                 @break
                 @case('updated')
                 <div class="space-y-4 m-5">
@@ -257,13 +267,134 @@
                         class="h-10 w-10 rounded-full object-cover"
                         />
                         <div class="flex-col ml-2">
+
                           <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1>
                           <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
                         </div>
                     </div>
+                  </summary>
+                </details>
                 </div>
                     @break
+                @endswitch
+
+            @break
+
+            @case('App\Models\Kategori')
+            
+            @switch($aktivitas->description)
+                @case('created')
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                      <div class="flex items-center">
+                        <img
+                          src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                          class="h-10 w-10 rounded-full object-cover"
+                          />
+                          <div class="flex-col ml-2">
+                            @if ($aktivitas->subject->deleted_at == null)
+                            {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a>  </h1> --}}
+                            <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                            @else
+                            <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori </h1>
+                            @endif
+                            <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                          </div>
+                      </div>
+                    </summary>
+                  </details>
+                </div>
+                @break
+                @case('updated')
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                          <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                    <svg
+                    class="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                    </summary>
+                    <p class="mt-4 px-4 leading-relaxed text-gray-700">
+                      {{ $aktivitas->event }} {{ $aktivitas->properties['old']['nama'] }} to {{ $aktivitas->properties['attributes']['nama'] }}
+                    </p>
+                  </details>
+                </div>
+                    @break
+                    @case('deleted')
+            {{-- {{ dd($aktivitas->subject->judul) }} --}}
+            <div class="space-y-4 m-5">
+              <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                <summary
+                  class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                >
+                <div class="flex items-center">
+                  <img
+                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                    class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div class="flex-col ml-2">
+                      @if ($aktivitas->deleted_at == null)
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                      @else
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                      <h1 class="block">{{ $aktivitas->subject->deleted_at->diffForHumans() }}</h1>
+                      @endif
+                    </div>
+                </div>
+                </summary>
+              </details>
+            </div>
+
+            @break
+            
+            @case('restored')
+            <div class="space-y-4 m-5">
+              <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                <summary
+                  class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                >
+                <div class="flex items-center">
+                  <img 
+                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                    class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div class="flex-col ml-2">
+                      @if ($aktivitas->subject->deleted_at == null)
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                      @else
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} kategori {{ $aktivitas->subject->nama }} </h1>
+                      @endif
+                      <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
+                    </div>
+                </div>
+              </summary>
+            </details>
+            </div>
+
+            @break
             @endswitch
+
+            @break
           
             @case('App\Models\User')
             
@@ -287,12 +418,12 @@
                           @else
                           <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} Peminjaman </h1>
                           @endif
-                          {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1> --}}
                           <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
                         </div>
                     </div>
+                  </summary>
+                </details>
                 </div>
-                {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Peminjaman {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->created_at->diffForHumans() }}</div> --}}
                 @break
                 @case('updated')
                 <div class="space-y-4 m-5">
@@ -310,6 +441,8 @@
                           <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
                         </div>
                     </div>
+                  </summary>
+                </details>
                 </div>
                     @break
             @endswitch
