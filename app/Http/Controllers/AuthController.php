@@ -40,6 +40,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials,$remember)) {
             $request->session()->regenerate();
             
+            activity()
+            ->event('login')
+            ->log(Auth::getUser()->name . ' has logged in');
             return redirect()->route('bukus');
         }
         
@@ -54,7 +57,6 @@ class AuthController extends Controller
 
     function googleCallback() {
         try {
-
             $user = Socialite::driver('google')->user();
             $findUser = User::where('google_id',$user->id)->first();
             

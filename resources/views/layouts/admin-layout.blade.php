@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script> --}}
     <title>Kawan Alinea</title>
-    {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
-    @vite(['resources/js/app.js'])
+    {{-- @vite(['resources/js/app.js']) --}}
 
     {{-- ckfinder --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
@@ -16,7 +15,6 @@
 </head>
 <body class="">
 
-{{-- <body x-data="{ sidebarOpen: false }"> --}}
   {{-- //FIXME  --}}
     <section  x-data="{ isOpen: true }" class="flex flex-row min-w-full min-h-full">
         <nav

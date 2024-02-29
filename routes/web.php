@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AktivitasController;
 use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\PeminjamanController;
 use App\Http\Controllers\Admin\PenerbitController;
@@ -149,6 +150,9 @@ Route::middleware('auth')->group(function () {
             Route::delete('/master/pengembalian/{pengembalian}/delete', 'destroy')->name('master-pengembalian-delete');
         });
 
+        Route::controller(AktivitasController::class)->group(function () {
+            Route::get('/aktivitas', 'index')->name('aktivitas');
+        });
     });
 
 });

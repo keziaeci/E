@@ -8,7 +8,6 @@
             
             <div class="grid items-center grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    {{-- //TODO many to many categories with multiple select --}}
                     {{-- //FIXME form input --}}
                     <label for="judul" class="block text-xs font-medium text-gray-700"> Judul </label>
                     
@@ -146,7 +145,6 @@
                 </div>
                 <x-multiselect
                 :kategoris="$kategoris"/>
-                {{-- @include('components.multiselect', $kategoris) --}}
             </div>
 
             <div class="mt-4">

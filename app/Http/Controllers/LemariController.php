@@ -13,7 +13,7 @@ class LemariController extends Controller
 {
     function store(Buku $buku) {
 
-        Peminjaman::create([
+        $peminjaman = Peminjaman::create([
             'tanggal_pinjam' => Carbon::now('Asia/Jakarta'),
             'tenggat_waktu' => Carbon::now('Asia/Jakarta')->addWeek(),
             'status' => $buku->checkStok(),
