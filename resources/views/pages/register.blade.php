@@ -4,11 +4,10 @@
         
         <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-lg text-center">
-                <h1 class="text-2xl font-bold sm:text-3xl">Create an account</h1>
+                <h1 class="text-2xl font-bold sm:text-3xl">Buat Akunmu</h1>
             
                 <p class="mt-4 text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque
-                    ipsa culpa autem, at itaque nostrum!
+                    Baca lebih, temukan lebih. Daftar sekarang untuk akses ke ribuan buku dan pengalaman membaca yang luar biasa.
                 </p>
             </div>
             

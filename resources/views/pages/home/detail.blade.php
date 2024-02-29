@@ -40,6 +40,7 @@
                   @method('Post')
                   @csrf
                   <button
+                  onclick="return confirm('Apakah anda yakin ingin meminjam?')"
                     class="inline-block border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-indigo-500"
                   >
                     Pinjam
@@ -71,7 +72,9 @@
                   <form action="{{ route('kembalikan-buku' , [$buku->id ,$peminjaman->id]) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <button class="inline-block  border min-w-full text-center border-pink-700 bg-pink-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring active:bg-pink-500 active:text-white" type="submit">
+                    <button 
+                    onclick="return confirm('Apakah anda yakin ingin kembalikan?')"
+                    class="inline-block  border min-w-full text-center border-pink-700 bg-pink-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-pink-600 focus:outline-none focus:ring active:bg-pink-500 active:text-white" type="submit">
                       Kembalikan
                     </button>
                   </form>
@@ -90,6 +93,7 @@
                       @method('Post')
                       @csrf
                       <button
+                      onclick="return confirm('Apakah anda yakin ingin mengajukan permintaan?')"
                         class="inline-block border min-w-full text-center border-black bg-black px-12 py-3 text-sm font-medium text-white hover:bg-white hover:text-black focus:outline-none focus:ring active:text-indigo-500"
                       >
                         Baca Lagi
@@ -128,7 +132,6 @@
 
           {{-- badge kategori --}}
           <div class="my-2 flex gap-2">
-            {{-- {{ dd($buku->kategoris) }} --}}
             @foreach ($buku->kategoris as $k)
             <a href="{{ route('kategori-buku', $k->id) }}" class="px-2 py-1 whitespace-nowrap rounded-full bg-gray-300">
               {{ $k->nama }}

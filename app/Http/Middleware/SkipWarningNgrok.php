@@ -15,14 +15,24 @@ class SkipWarningNgrok
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $res = $next($request);
-        // return $res->header('ngrok-skip-browser-warning', '123');
-        // $request->headers->set('ngrok-skip-browser-warning','123');
+        // header('ngrok-skip-browser-warning' , true);
+
         // return $next($request);
 
-        $response = $next($request);
-    $response->headers->set('ngrok-skip-browser-warning', '123');
+        // $request->headers->set('ngrok-skip-browser-warning', true);
+        // return $next($request);
+        
+        // $response = $next($request);
+        // return $request->header('ngrok-skip-browser-warning', true);
 
-    return $response;
+
+        $response = $next($request);
+
+        // $response->headers->set('ngrok-skip-browser-warning', '123');
+        $response->headers->set('ngrok-skip-browser-warning', '123');
+
+        return $response;
+        // return $response;
+
     }
 }

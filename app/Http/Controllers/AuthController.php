@@ -62,6 +62,9 @@ class AuthController extends Controller
             
             if ($findUser) {
                 Auth::login($findUser);
+                activity()
+                ->event('login')
+                ->log(Auth::getUser()->name . ' has logged in');
                 return redirect('/');
             } else {
                 $newUser = User::create([
@@ -75,6 +78,9 @@ class AuthController extends Controller
                 ]);
 
                 Auth::login($newUser);
+                activity()
+                ->event('login')
+                ->log(Auth::getUser()->name . ' has logged in');
                 return redirect()->route('bukus');
             }
         } catch (\Throwable $th) {
@@ -84,6 +90,9 @@ class AuthController extends Controller
     
     function logout(Request $request) {
         // dd($request);
+        activity()
+        ->event('logout')
+        ->log(Auth::getUser()->name . ' has logged out');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

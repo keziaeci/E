@@ -13,222 +13,311 @@
 
   @else
       
-  @foreach ($aktivitases as $aktivitas)
-  {{-- {{ $aktivitas-> }} --}}
-    @switch($aktivitas->subject_type)
-        @case('App\Models\Buku')
-        
-        @switch($aktivitas->description)
-          @case('created')
-          <div class="space-y-4 m-5">
-            <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-              <summary
-                class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-              >
-              <div class="flex items-center">
-                <img
-                  src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                  class="h-10 w-10 rounded-full object-cover"
-                  />
-                  <div class="flex-col ml-2">
-                    {{-- {{ dd() }} --}}
-                    @if ($aktivitas->subject->deleted_at == null)
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
-                    @else
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
-                    @endif
-                    <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
-                  </div>
-              </div>
-          </div>
-
-          @break
-          
-          @case('deleted')
-          {{-- {{ dd($aktivitas->subject->judul) }} --}}
-          <div class="space-y-4 m-5">
-            <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-              <summary
-                class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-              >
-              <div class="flex items-center">
-                <img
-                  src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                  class="h-10 w-10 rounded-full object-cover"
-                  />
-                  <div class="flex-col ml-2">
-                    @if ($aktivitas->deleted_at == null)
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }}</h1>
-                    @else
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
-                    <h1 class="block">{{ $aktivitas->subject->deleted_at->diffForHumans() }}</h1>
-                    @endif
-                  </div>
-              </div>
-          </div>
-
-          @break
-          
-          @case('restored')
-          <div class="space-y-4 m-5">
-            <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-              <summary
-                class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-              >
-              <div class="flex items-center">
-                <img 
-                  src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                  class="h-10 w-10 rounded-full object-cover"
-                  />
-                  <div class="flex-col ml-2">
-                    @if ($aktivitas->subject->deleted_at == null)
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
-                    @else
-                    <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
-                    @endif
-                    {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} {{ $aktivitas->subject->judul }}</h1> --}}
-                    <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
-                  </div>
-              </div>
-          </div>
-
-          @break
-          @case('updated')
-
-              {{-- <div class="space-y-4 m-5">
-                <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-                  <summary
-                    class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-                  >
-                  <div class="flex items-center">
-                    <img
-                      src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                      class="h-10 w-10 rounded-full object-cover"
-                      />
-                      <div class="flex-col ml-2">
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
-                        <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
-                      </div>
-                  </div>
-              
-                    <svg
-                      class="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </summary>
-              
-                  <p class="mt-4 px-4 leading-relaxed text-gray-700">
-                    {{ dd($aktivitas->properties) }}
-                    @foreach ($aktivitas->properties as $key)
-                        {{ $key['old'] }}
-                    @endforeach
-                    @foreach ($aktivitas->properties as $key)
-                        @foreach ($key["old"] as $oldKey => $oldValue)
-                        {{ $oldKey }} baklbalb {{ $oldValue }}
-                        @endforeach
-                        @foreach ($key["attributes"] as $attrKey => $attrValue)
-                        {{ $attrKey }} baklbalb {{ $attrValue }}
-                        @endforeach
-                    @endforeach
-                  </p>
-                </details>
-              </div> --}}
-              <div class="space-y-4 m-5">
-                <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-                  <summary
-                    class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-                  >
-                  <div class="flex items-center">
-                    <img
-                      src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                      class="h-10 w-10 rounded-full object-cover"
-                      />
-                      <div class="flex-col ml-2">
-                        @if ($aktivitas->subject->deleted_at == null)
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
-                        @else
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
-                        @endif
-                        <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
-                      </div>
-                  </div>
-              </div>
-
-              {{-- <div class="m-5 border border-black rounded-lg p-3 items-center flex">
-                <img
-                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                    class="h-10 w-10 rounded-full object-cover"
-                      />
-                      <div class="flex-col ml-2">
-                        <h1 class="block"> <b> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
-                        <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
-                      </div>
-              </div> --}}
-              {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Buku {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->updated_at->diffForHumans() }}</div> --}}
-                  
-                  @break
-          @endswitch
-        
+    @foreach ($aktivitases as $aktivitas)
+    {{-- {{ dd($aktivitas->event) }} --}}
+      @switch($aktivitas->event)
+        @case('login')
+        <div class="space-y-4 m-5">
+          <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+            <summary
+              class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+            >
+            <div class="flex items-center">
+              <img
+                src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                class="h-10 w-10 rounded-full object-cover"
+                />
+                <div class="flex-col ml-2">
+                  <h1>{{ $aktivitas->description }}</h1>
+                  <h1 class="block">{{ $aktivitas->created_at->diffForHumans() }}</h1>
+                </div>
+            </div>
+        </div>
         @break
+        @case('logout')
+        <div class="space-y-4 m-5">
+          <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+            <summary
+              class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+            >
+            <div class="flex items-center">
+              <img
+                src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                class="h-10 w-10 rounded-full object-cover"
+                />
+                <div class="flex-col ml-2">
+                  <h1>{{ $aktivitas->description }}</h1>
+                  <h1 class="block">{{ $aktivitas->created_at->diffForHumans() }}</h1>
+                </div>
+            </div>
+        </div>
+            @break
+        @default
+              
+      @endswitch
 
-        @case('App\Models\Peminjaman')
+      @switch($aktivitas->subject_type)
+          @case('App\Models\Buku')
           
           @switch($aktivitas->description)
-              @case('created')
-              {{-- {{ $aktivitas->subject }} --}}
+            @case('created')
+            <div class="space-y-4 m-5">
+              <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                <summary
+                  class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                >
+                <div class="flex items-center">
+                  <img
+                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                    class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div class="flex-col ml-2">
+                      {{-- {{ dd() }} --}}
+                      @if ($aktivitas->subject->deleted_at == null)
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
+                      @else
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
+                      @endif
+                      <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                    </div>
+                </div>
+            </div>
 
-              <div class="space-y-4 m-5">
-                <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-                  <summary
-                    class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-                  >
-                  <div class="flex items-center">
-                    <img
+            @break
+            
+            @case('deleted')
+            {{-- {{ dd($aktivitas->subject->judul) }} --}}
+            <div class="space-y-4 m-5">
+              <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                <summary
+                  class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                >
+                <div class="flex items-center">
+                  <img
+                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                    class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div class="flex-col ml-2">
+                      @if ($aktivitas->deleted_at == null)
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }}</h1>
+                      @else
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
+                      <h1 class="block">{{ $aktivitas->subject->deleted_at->diffForHumans() }}</h1>
+                      @endif
+                    </div>
+                </div>
+            </div>
+
+            @break
+            
+            @case('restored')
+            <div class="space-y-4 m-5">
+              <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                <summary
+                  class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                >
+                <div class="flex items-center">
+                  <img 
+                    src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                    class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <div class="flex-col ml-2">
+                      @if ($aktivitas->subject->deleted_at == null)
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
+                      @else
+                      <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
+                      @endif
+                      {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} {{ $aktivitas->subject->judul }}</h1> --}}
+                      <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
+                    </div>
+                </div>
+            </div>
+
+            @break
+            @case('updated')
+
+                {{-- <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                
+                      <svg
+                        class="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                
+                    <p class="mt-4 px-4 leading-relaxed text-gray-700">
+                      {{ dd($aktivitas->properties) }}
+                      @foreach ($aktivitas->properties as $key)
+                          {{ $key['old'] }}
+                      @endforeach
+                      @foreach ($aktivitas->properties as $key)
+                          @foreach ($key["old"] as $oldKey => $oldValue)
+                          {{ $oldKey }} baklbalb {{ $oldValue }}
+                          @endforeach
+                          @foreach ($key["attributes"] as $attrKey => $attrValue)
+                          {{ $attrKey }} baklbalb {{ $attrValue }}
+                          @endforeach
+                      @endforeach
+                    </p>
+                  </details>
+                </div> --}}
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          @if ($aktivitas->subject->deleted_at == null)
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
+                          @else
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku {{ $aktivitas->subject->judul }} </h1>
+                          @endif
+                          <h1 class="block">{{ $aktivitas->subject->updated_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- <div class="m-5 border border-black rounded-lg p-3 items-center flex">
+                  <img
                       src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
                       class="h-10 w-10 rounded-full object-cover"
-                      />
-                      <div class="flex-col ml-2">
-                        @if ($aktivitas->subject->deleted_at == null)
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a>  </h1>
-                        @else
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} Peminjaman </h1>
-                        @endif
-                        {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1> --}}
-                        <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
-                      </div>
-                  </div>
-              </div>
-              {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Peminjaman {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->created_at->diffForHumans() }}</div> --}}
-              @break
-              @case('updated')
-              <div class="space-y-4 m-5">
-                <details class="group [&_summary::-webkit-details-marker]:hidden" open>
-                  <summary
-                    class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
-                  >
-                  <div class="flex items-center">
-                    <img
-                      src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
-                      class="h-10 w-10 rounded-full object-cover"
-                      />
-                      <div class="flex-col ml-2">
-                        <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1>
-                        <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
-                      </div>
-                  </div>
-              </div>
-                  @break
-          @endswitch
+                        />
+                        <div class="flex-col ml-2">
+                          <h1 class="block"> <b> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} buku <a href="{{ route('master-buku-detail', $aktivitas->subject->id) }}" class="underline">{{ $aktivitas->subject->judul }}</a> </h1>
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                </div> --}}
+                {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Buku {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->updated_at->diffForHumans() }}</div> --}}
+                    
+                    @break
+            @endswitch
           
-        @break
-    @endswitch
+          @break
 
-  @endforeach
+          @case('App\Models\Peminjaman')
+            
+            @switch($aktivitas->description)
+                @case('created')
+
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          @if ($aktivitas->subject->deleted_at == null)
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a>  </h1>
+                          @else
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} Peminjaman </h1>
+                          @endif
+                          {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1> --}}
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Peminjaman {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->created_at->diffForHumans() }}</div> --}}
+                @break
+                @case('updated')
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1>
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                </div>
+                    @break
+            @endswitch
+          
+            @case('App\Models\User')
+            
+            @switch($aktivitas->event)
+                
+                @case('created')
+
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          @if ($aktivitas->subject->deleted_at == null)
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a>  </h1>
+                          @else
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }} Peminjaman </h1>
+                          @endif
+                          {{-- <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1> --}}
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="">{{ $aktivitas->causer->name }} {{ $aktivitas->description }} Peminjaman {{ $aktivitas->subject->judul  }} {{ $aktivitas->subject->created_at->diffForHumans() }}</div> --}}
+                @break
+                @case('updated')
+                <div class="space-y-4 m-5">
+                  <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+                    <summary
+                      class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"
+                    >
+                    <div class="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/notionists-neutral/svg?seed={{ $aktivitas->causer->name }}"
+                        class="h-10 w-10 rounded-full object-cover"
+                        />
+                        <div class="flex-col ml-2">
+                          <h1 class="block"> <b class="font-semibold"> {{ $aktivitas->causer->name }}</b> {{ $aktivitas->description }}  <a href="{{ route('master-peminjaman-detail', $aktivitas->subject->id) }}" class="underline">Peminjaman</a> </h1>
+                          <h1 class="block">{{ $aktivitas->subject->created_at->diffForHumans() }}</h1>
+                        </div>
+                    </div>
+                </div>
+                    @break
+            @endswitch
+            
+          @break
+      @endswitch
+
+    @endforeach
   @endif
 
 
