@@ -28,7 +28,6 @@
               </div>
             </div>
         
-            {{-- //FIXME button on small screen --}}
             @if (is_null($status))
               @if ($buku->isNotAvailable())
               <button class="inline-block  border min-w-full text-center border-gray-300 bg-gray-200 px-12 py-3 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:text-gray-500 focus:outline-none focus:ring focus:ring-gray-200 active:text-gray-500">
