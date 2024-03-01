@@ -396,7 +396,7 @@
 
             @break
           
-            @case('App\Models\User')
+            {{-- @case('App\Models\User')
             
             @switch($aktivitas->event)
                 
@@ -447,7 +447,7 @@
                     @break
             @endswitch
             
-          @break
+          @break --}}
       @endswitch
 
     @endforeach
