@@ -11,6 +11,7 @@
                     
                     <input
                     type="text"
+                    autocomplete="off"
                     id="nama"
                     placeholder="Nama"
                     name="nama"
@@ -26,6 +27,7 @@
                     <input
                     type="text"
                     id="username"
+                    autocomplete="off"
                     placeholder="username"
                     name="username"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"
@@ -43,6 +45,7 @@
                     <input
                     type="email"
                     id="email"
+                    autocomplete="off"
                     placeholder="email"
                     name="email"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"

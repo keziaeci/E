@@ -4,7 +4,6 @@
 <header class="border-b">
 
   {{-- //TODO add toast setiap adanya operasi dengan data --}}
-  {{-- //FIXME all icon and field on small breakpoints  --}}
     <div class="mx-0 lg:mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center sm:justify-between sm:gap-4">
         <div class="hidden sm:block">

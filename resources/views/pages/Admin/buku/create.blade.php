@@ -8,13 +8,13 @@
             
             <div class="grid items-center grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    {{-- //FIXME form input --}}
-                    <label for="judul" class="block text-xs font-medium text-gray-700"> Judul </label>
+                    <label for="judul" class="block text-xs font-medium text-gray-700" > Judul </label>
                     
                     <input
                     type="text"
                     id="judul"
                     value="{{ old('judul') }}"
+                    autocomplete="off"
                     placeholder="Judul"
                     name="judul"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"

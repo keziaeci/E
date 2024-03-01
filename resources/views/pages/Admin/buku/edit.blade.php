@@ -7,8 +7,6 @@
             
             <div class="grid items-center grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                    {{-- //FIXME form input --}}
-                    {{-- //FIXME add kategori in edit --}}
                     <label for="judul" class="block text-xs font-medium text-gray-700"> Judul </label>
                     
                     <input
