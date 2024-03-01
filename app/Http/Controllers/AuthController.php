@@ -46,7 +46,7 @@ class AuthController extends Controller
             return redirect()->route('bukus');
         }
         
-        return back()->with([
+        return back()->withErrors([
             'error' => 'The provided credentials do not match our records.',
         ]);
     }
