@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBukuRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateBukuRequest;
+use Spatie\Activitylog\Models\Activity;
 
 class BukuController extends Controller
 {
@@ -43,7 +44,6 @@ class BukuController extends Controller
      */
     public function store(StoreBukuRequest $request)
     {
-        // dd($request);
         $request->validated();
 
         $buku =  Buku::create([
@@ -131,11 +131,6 @@ class BukuController extends Controller
      */
     public function destroy(Buku $buku)
     {   
-        foreach ($buku->images as $cover) {
-            Storage::disk('public')->delete($cover->filename);
-            $cover->delete();
-        } 
-
         $buku->delete();
         return redirect()->route('master-buku')->with('success', 'Data berhasil dihapus!');
     }
@@ -152,6 +147,14 @@ class BukuController extends Controller
     }
 
     function forceDelete(Buku $buku)  {
+        
+        foreach ($buku->images as $cover) {
+            Storage::disk('public')->delete($cover->filename);
+            $cover->delete();
+        } 
+
+        activity()->disableLogging();
+        Activity::where('subject_id', $buku->id)->delete();
         $buku->forceDelete();
         return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }

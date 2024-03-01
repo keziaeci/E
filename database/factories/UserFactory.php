@@ -28,6 +28,8 @@ class UserFactory extends Factory
             'role' => fake()->randomElement(['Pengguna', 'Admin']),
             'username' => fake()->username(),
             'email' => fake()->unique()->safeEmail(),
+            'google_id' => mt_rand(1,5),
+            'social_type' =>'google',
             // 'bio' => fake()->paragraph(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('123'),

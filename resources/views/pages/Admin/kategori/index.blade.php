@@ -115,7 +115,6 @@
         </table>
     </div>
 
-    {{-- //FIXME success alert position after inserting data --}}
     @if (session()->has('success'))
     <div x-data="{ open: true }" x-show="open" role="alert" class="absolute max-w-sm z-20  top-10 rounded-xl border border-gray-100 bg-white p-4">
         

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Penerbit;
 use App\Http\Controllers\Controller;
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Requests\StorePenerbitRequest;
 use App\Http\Requests\UpdatePenerbitRequest;
 
@@ -89,6 +90,8 @@ class PenerbitController extends Controller
      * Delete permanently specified soft-deleted data
      */
     function forceDelete(Penerbit $penerbit)  {
+        activity()->disableLogging();
+        Activity::where('subject_id', $penerbit->id)->delete();
         $penerbit->forceDelete();
         return redirect()->back()->with('success', 'Data berhasil dihapus permanen!');
     }

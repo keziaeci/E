@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Peminjaman extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory , SoftDeletes , LogsActivity;
 
     protected $guarded = ['id'];
 
@@ -25,6 +27,11 @@ class Peminjaman extends Model
         'Past Due' => 'Dikembalikan Terlambat'
     ];
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['*']);
+    }
     function scopeStatus($query,$status) {
         return $query->where('status' , 'like' , "%{$status}%");
     }

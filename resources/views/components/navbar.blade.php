@@ -1,12 +1,12 @@
-{{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.js" defer></script>
+{{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 <header class="border-b">
 
   {{-- //TODO add toast setiap adanya operasi dengan data --}}
-  {{-- //FIXME all icon and field on small breakpoints  --}}
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-0 lg:mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="flex items-center sm:justify-between sm:gap-4">
-        <div class="flex invisible md:visible lg:visible">
+        <div class="hidden sm:block">
           <a
             class="inline-block rounded border border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
             href="{{ route('bukus') }}"
@@ -51,8 +51,8 @@
 
         {{-- ketika layar kecil --}}
         <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
-          <div class="flex gap-4 ">
-            <div class="flex lg:hidden md:hidden m-0 p-0 ">
+          <div class="flex gap-4">
+            <div class="flex lg:hidden md:hidden ">
               <a
                 class="inline-block rounded border  border-black bg-black px-3 py-2.5 text-sm font-medium text-white focus:outline-none active:outline-gray-900"
                 href="{{ route('bukus') }}"
@@ -162,6 +162,7 @@
                     @csrf
                     <button
                       type="submit"
+                      onclick="return confirm('Apakah anda yakin ingin keluar?')"
                       class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                       role="menuitem"
                     >
@@ -184,10 +185,7 @@
                     </button>
                   </form>
   
-                  {{-- <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit">logout</button>
-                  </form> --}}
+                  
                 </div>
               </div>
             </div>

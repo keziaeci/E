@@ -13,6 +13,7 @@
                     <input
                     type="text"
                     id="nama"
+                    autocomplete="off"
                     placeholder="Nama"
                     name="nama"
                     class="w-full rounded-lg border border-gray-200 p-3 text-sm"

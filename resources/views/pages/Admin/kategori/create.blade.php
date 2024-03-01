@@ -11,6 +11,7 @@
                     <label for="judul" class="block text-xs font-medium text-gray-700"> Nama </label>
                     
                     <input
+                    autocomplete="off"
                     type="text"
                     id="nama"
                     placeholder="Nama"

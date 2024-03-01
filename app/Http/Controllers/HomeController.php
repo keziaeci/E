@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     function index()  {
         return view('pages.home.index', [
-            'bukus' => Buku::all(),
+            'bukus' => Buku::withoutTrashed()->get(),
             'famous' => Buku::withCount('peminjamans')->orderBy('peminjamans_count' , 'DESC')->get()
         ]); 
     }

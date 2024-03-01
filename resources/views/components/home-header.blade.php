@@ -65,7 +65,6 @@
             </form> --}}
             <div x-data="{ isOpen: false }" class="flex transition-all duration-300" :class="{'relative': isOpen , 'relative' : !isOpen}">
               <label for="Search" class="sr-only"> Search </label>
-              
               <form action="{{ route('cari-buku') }}" method="GET" class="flex">
                 <input
                   :class="{'hidden' : isOpen , 'w-14 px-2' : !isOpen}"
@@ -73,7 +72,7 @@
                   name="search"
                   id="Search"
                   placeholder="Search for..."
-                  class="w-full lg:hidden inline rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+                  class="w-full lg:hidden md:hidden inline rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
                 />
               </form>
             <button x-on:click="isOpen = !isOpen"
@@ -207,7 +206,7 @@
                     @method('POST')
                     @csrf
                     <button
-                      type="submit"
+                      type="submit" onclick="return confirm('Apakah anda yakin ingin keluar?')"
                       class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
                       role="menuitem"
                     >

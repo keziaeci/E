@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AktivitasController;
 use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\PeminjamanController;
 use App\Http\Controllers\Admin\PenerbitController;
@@ -36,6 +37,8 @@ Route::middleware(['guest','nocache'])->group(function () {
         Route::get('/register', 'create')->name('register');
         Route::post('/register/store', 'store')->name('register-store');
         Route::post('/login/auth', 'authenticate')->name('auth');
+        Route::get('/google/redirect', 'redirect')->name('google-redirect');
+        Route::get('/callback/google', 'googleCallback')->name('google-callback');
     });
 
 });
@@ -147,6 +150,9 @@ Route::middleware('auth')->group(function () {
             Route::delete('/master/pengembalian/{pengembalian}/delete', 'destroy')->name('master-pengembalian-delete');
         });
 
+        Route::controller(AktivitasController::class)->group(function () {
+            Route::get('/aktivitas', 'index')->name('aktivitas');
+        });
     });
 
 });
