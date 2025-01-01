@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         Peminjaman::factory(50)->create();
         Kategori::factory(5)->create();
         KategoriBuku::factory(15)->create();
+        
+        $this->call([
+            AdminSeeder::class,
+        ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
