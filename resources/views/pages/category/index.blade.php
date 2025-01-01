@@ -16,7 +16,8 @@
             @foreach ($kategoris->bukus as $buku)
                 <x-book-card
                 :id="$buku->id"
-                :cover="$buku->images[0]->filename"
+                {{-- :cover="$buku->images[0]->filename" --}}
+                :cover="$buku->images?->first()?->filename"
                 :judul="$buku->judul"
                 :pengarang="$buku->pengarang->nama"
                 />

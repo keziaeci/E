@@ -86,7 +86,8 @@
                 @foreach ($bukus as $buku)
                 <x-book-card 
                     :id="$buku->buku->id"
-                    :cover="$buku->buku->images[0]->filename"
+                    :cover="$buku->images?->first()?->filename"
+                    {{-- :cover="$buku->buku->images[0]->filename" --}}
                     :judul="$buku->buku->judul"
                     :pengarang="$buku->buku->pengarang->nama"
                 />
