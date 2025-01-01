@@ -17,7 +17,7 @@ class KategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->unique()->word()
+            'nama' => fake()->unique()->name()
         ];
     }
 }
